@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
 
     Vector2 lookDirection = new Vector2(0, -1);
-    float moveSpeed = 600f;
+    float moveSpeed = 650f;
     Vector2 moveInput;
 
     void Start()
