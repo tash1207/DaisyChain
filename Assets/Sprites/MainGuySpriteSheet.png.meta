@@ -113,12 +113,12 @@ TextureImporter:
       name: MainGuySpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 108
-        width: 41.333332
-        height: 36
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: MainGuySpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 41
+        x: 48
         y: 108
-        width: 41.333332
-        height: 36
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: MainGuySpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 82
+        x: 94
         y: 108
-        width: 41.333332
-        height: 36
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: MainGuySpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 2
+        y: 73
+        width: 31
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: MainGuySpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 41
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 48
+        y: 73
+        width: 31
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: MainGuySpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 82
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 2
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: MainGuySpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 48
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: MainGuySpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 41
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 94
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: MainGuySpriteSheet_8
       rect:
         serializedVersion: 2
-        x: 82
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 0
+        y: 2
+        width: 30
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: MainGuySpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 41.333332
-        height: 36
+        x: 46
+        y: 1
+        width: 31
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,12 +323,12 @@ TextureImporter:
       name: MainGuySpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 41
-        y: 0
-        width: 41.333332
-        height: 36
+        x: 92
+        y: 1
+        width: 30
+        height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,27 +336,6 @@ TextureImporter:
       bones: []
       spriteID: 16d7b983b8ab2314fba4539611e63921
       internalID: -1325014196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MainGuySpriteSheet_11
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 0
-        width: 41.333332
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c1b1a4d44a4b184d83f09311b0953fd
-      internalID: 164721970
       vertices: []
       indices: 
       edges: []
@@ -375,7 +354,6 @@ TextureImporter:
       MainGuySpriteSheet_0: -1339863010
       MainGuySpriteSheet_1: -1806228227
       MainGuySpriteSheet_10: -1325014196
-      MainGuySpriteSheet_11: 164721970
       MainGuySpriteSheet_2: 197456081
       MainGuySpriteSheet_3: -1387876373
       MainGuySpriteSheet_4: -831704797
