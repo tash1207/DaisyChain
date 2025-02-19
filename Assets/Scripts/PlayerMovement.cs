@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
 
     Vector2 lookDirection = new Vector2(0, -1);
-    float moveSpeed = 650f;
+    float moveSpeed = 3f;
     Vector2 moveInput;
 
     void Start()
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Walk()
     {
-        rb2d.velocity = moveInput * moveSpeed * Time.deltaTime;
+        rb2d.velocity = moveInput * moveSpeed;
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rb2d.velocity.x) > Mathf.Epsilon;
         bool playerHasVerticalSpeed = Mathf.Abs(rb2d.velocity.y) > Mathf.Epsilon;
