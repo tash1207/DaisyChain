@@ -13,6 +13,11 @@ public class InteractionSquare : MonoBehaviour
 
     bool hasInteracted = false;
 
+    int outsideHouseSceneIndex = 2;
+    int neighborYardSceneIndex = 3;
+    int constructionSceneIndex = 4;
+    int beachSceneIndex = 5;
+
     public enum InteractionType
     {
         BinCompost,
@@ -26,8 +31,10 @@ public class InteractionSquare : MonoBehaviour
         OutsideHouseDown,
         OutsideHouseUp,
         NeighborRight,
-        NeighborUp,
+        NeighborDown,
         Neighbor,
+        ConstructionTopLeft,
+        ConstructionTopRight,
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -86,26 +93,39 @@ public class InteractionSquare : MonoBehaviour
             if (interactionType == InteractionType.OutsideHouseLeft)
             {
                 dialogCanvas.SetActive(false);
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(neighborYardSceneIndex);
             }
             else if (interactionType == InteractionType.OutsideHouseDown)
             {
                 dialogCanvas.SetActive(false);
-                Debug.Log("Coming soon");
-                // TODO: Load construction scene.
-                // SceneManager.LoadScene(4);
+                SceneManager.LoadScene(constructionSceneIndex);
             }
             else if (interactionType == InteractionType.OutsideHouseUp)
             {
                 dialogCanvas.SetActive(false);
                 Debug.Log("Sorry, not yet");
                 // TODO: Load beach scene.
-                // SceneManager.LoadScene(5);
+                // SceneManager.LoadScene(beachSceneIndex);
             }
             else if (interactionType == InteractionType.NeighborRight)
             {
                 dialogCanvas.SetActive(false);
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(outsideHouseSceneIndex);
+            }
+            else if (interactionType == InteractionType.NeighborDown)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(constructionSceneIndex);
+            }
+            else if (interactionType == InteractionType.ConstructionTopLeft)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(neighborYardSceneIndex);
+            }
+            else if (interactionType == InteractionType.ConstructionTopRight)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(outsideHouseSceneIndex);
             }
         }
     }

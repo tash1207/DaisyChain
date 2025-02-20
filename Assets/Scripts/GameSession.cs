@@ -37,16 +37,35 @@ public class GameSession : MonoBehaviour
         {
             case 2:
                 currentSceneSetting = SceneSetting.OutsideHouse;
-                if (previousSceneSetting == SceneSetting.NeighborYard)
+                if (previousSceneSetting == SceneSetting.Construction)
+                {
+                    FindObjectOfType<SceneStart>().ConstructionToOutsideHouse();
+                }
+                else if (previousSceneSetting == SceneSetting.NeighborYard)
                 {
                     FindObjectOfType<SceneStart>().NeighborYardToOutsideHouse();
                 }
                 break;
             case 3:
                 currentSceneSetting = SceneSetting.NeighborYard;
-                if (previousSceneSetting == SceneSetting.OutsideHouse)
+                if (previousSceneSetting == SceneSetting.Construction)
+                {
+                    FindObjectOfType<SceneStart>().ConstructionToNeighborYard();
+                }
+                else if (previousSceneSetting == SceneSetting.OutsideHouse)
                 {
                     FindObjectOfType<SceneStart>().OutsideHouseToNeighborYard();
+                }
+                break;
+            case 4:
+                currentSceneSetting = SceneSetting.Construction;
+                if (previousSceneSetting == SceneSetting.NeighborYard)
+                {
+                    FindObjectOfType<SceneStart>().NeighborYardToConstruction();
+                }
+                else if (previousSceneSetting == SceneSetting.OutsideHouse)
+                {
+                    FindObjectOfType<SceneStart>().OutsideHouseToConstruction();
                 }
                 break;
         }
