@@ -25,6 +25,7 @@ public class InteractionSquare : MonoBehaviour
         OutsideHouseUp,
         NeighborRight,
         NeighborUp,
+        Neighbor,
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -68,6 +69,11 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogText.text = "Hello friend!";
             }
+            else if (interactionType == InteractionType.Neighbor)
+            {
+                dialogText.text = "Hi there! Would you like some water?";
+                // TODO: Max increase water stat.
+            }
 
             dialogCanvas.SetActive(true);
 
@@ -78,12 +84,14 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.OutsideHouseDown)
             {
+                dialogCanvas.SetActive(false);
                 Debug.Log("Coming soon");
                 // TODO: Load construction scene.
                 // SceneManager.LoadScene(4);
             }
             else if (interactionType == InteractionType.OutsideHouseUp)
             {
+                dialogCanvas.SetActive(false);
                 Debug.Log("Sorry, not yet");
                 // TODO: Load beach scene.
                 // SceneManager.LoadScene(5);
