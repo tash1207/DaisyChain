@@ -134,26 +134,26 @@ public class InteractionSquare : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         if (interactionType == InteractionType.Human)
         {
-            dialogText.text = "Well, let's go for a walk then!";
-        }
-        else if (interactionType == InteractionType.Neighbor)
-        {
-            dialogText.text = "Here you go!";
-            FindObjectOfType<Health>().MaxWater();
-        }
+            dialogText.text = "Well, I guess we can go for a walk.";
+            yield return new WaitForSeconds(2.5f);
 
-        yield return new WaitForSeconds(2.5f);
-        ResumePlayerMovement();
-
-        if (interactionType == InteractionType.Human)
-        {
+            ResumePlayerMovement();
             yield return new WaitForSeconds(1f);
             // TODO: Fade to black?
             SceneManager.LoadScene(2);
         }
         else if (interactionType == InteractionType.Neighbor)
         {
+            dialogText.text = "Here you go!";
+            FindObjectOfType<Health>().MaxWater();
+            yield return new WaitForSeconds(2.5f);
+
+            dialogText.text = "It's good to see you outside, Casey! We miss you at book club!";
+            yield return new WaitForSeconds(2.5f);
+
+            ResumePlayerMovement();
             yield return new WaitForSeconds(1f);
+
             Destroy(gameObject);
         }
     }
