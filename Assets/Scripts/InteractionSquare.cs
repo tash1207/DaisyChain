@@ -35,18 +35,20 @@ public class InteractionSquare : MonoBehaviour
             if (interactionType == InteractionType.BinCompost)
             {
                 dialogText.text = "Yum!";
-                // TODO: Increase soil stat.
+                FindObjectOfType<Health>().IncreaseSoil(20);
+                StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.BinTrash)
             {
                 dialogText.text = "Ew gross!";
-                // TODO: Decrease soil stat.
+                FindObjectOfType<Health>().DecreaseSoil(20);
+                StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.Collar)
             {
                 dialogText.text = "Ooh shiny! Yoink!";
                 PausePlayerMovement();
-                StartCoroutine(CollectCollectible());
+                StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.Fridge)
             {
@@ -106,15 +108,16 @@ public class InteractionSquare : MonoBehaviour
         }
     }
 
-    IEnumerator CollectCollectible()
+    IEnumerator OneTimeUse()
     {
         yield return new WaitForSeconds(2f);
 
         if (collectible != null)
         {
             Destroy(collectible);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
 
         if (interactionType == InteractionType.Collar)
         {
