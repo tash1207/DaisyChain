@@ -22,8 +22,6 @@ public class Health : MonoBehaviour
         soilSlider.value = soilHealth;
         sunSlider.value = sunHealth;
         waterSlider.value = waterHealth;
-
-        // DontDestroyOnLoad!!
     }
 
     public void DecreaseAir(int value)

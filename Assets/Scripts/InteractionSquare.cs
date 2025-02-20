@@ -11,6 +11,8 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] GameObject dialogCanvas;
     [SerializeField] TMP_Text dialogText;
 
+    bool hasInteracted = false;
+
     public enum InteractionType
     {
         BinCompost,
@@ -30,6 +32,7 @@ public class InteractionSquare : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasInteracted) { return; }
         if (collision.tag == "Player")
         {
             if (interactionType == InteractionType.BinCompost)
@@ -74,6 +77,7 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.Neighbor)
             {
                 dialogText.text = "Hi there! Would you like some water?";
+                FindObjectOfType<Health>().IncreaseWater(50);
                 // TODO: Max increase water stat.
             }
 
@@ -105,6 +109,7 @@ public class InteractionSquare : MonoBehaviour
                 // TODO: Load beach scene.
                 // SceneManager.LoadScene(5);
             }
+            hasInteracted = true;
         }
     }
 
@@ -129,21 +134,30 @@ public class InteractionSquare : MonoBehaviour
     IEnumerator NextDialog()
     {
         yield return new WaitForSeconds(2.5f);
-        dialogText.text = "Well, let's go for a walk then!";
+        if (interactionType == InteractionType.Human)
+        {
+            dialogText.text = "Well, let's go for a walk then!";
+        }
 
         yield return new WaitForSeconds(2.5f);
         ResumePlayerMovement();
 
-        yield return new WaitForSeconds(1f);
-        // TODO: Fade to black?
-        SceneManager.LoadScene(2);
+        if (interactionType == InteractionType.Human)
+        {
+            yield return new WaitForSeconds(1f);
+            // TODO: Fade to black?
+            SceneManager.LoadScene(2);
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            dialogCanvas.SetActive(false);
+            if (dialogCanvas != null)
+            {
+                dialogCanvas.SetActive(false);
+            }
         }
     }
 
