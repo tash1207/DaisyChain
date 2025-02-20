@@ -53,5 +53,6 @@ public class PlayerMovement : MonoBehaviour
     {
         pausePlayerMovement = true;
         rb2d.velocity = new Vector2(0, 0);
+        animator.SetBool("isWalking", false);
     }
 }

@@ -107,12 +107,12 @@ public class InteractionSquare : MonoBehaviour
                 dialogCanvas.SetActive(false);
                 SceneManager.LoadScene(2);
             }
-            hasInteracted = true;
         }
     }
 
     IEnumerator OneTimeUse()
     {
+        hasInteracted = true;
         yield return new WaitForSeconds(2f);
 
         if (collectible != null)
