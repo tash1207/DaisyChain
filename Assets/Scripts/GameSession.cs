@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
+    public enum SceneSetting
+    {
+        Beach,
+        Construction,
+        NeighborYard,
+        OutsideHouse,
+    }
+
+    SceneSetting previousSceneSetting = SceneSetting.OutsideHouse;
+    SceneSetting currentSceneSetting = SceneSetting.OutsideHouse;
+
     void Awake()
     {
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
@@ -16,6 +27,28 @@ public class GameSession : MonoBehaviour
         else
         {
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    public void SetSceneSettings()
+    {
+        previousSceneSetting = currentSceneSetting;
+        switch(SceneManager.GetActiveScene().buildIndex)
+        {
+            case 2:
+                currentSceneSetting = SceneSetting.OutsideHouse;
+                if (previousSceneSetting == SceneSetting.NeighborYard)
+                {
+                    FindObjectOfType<SceneStart>().NeighborYardToOutsideHouse();
+                }
+                break;
+            case 3:
+                currentSceneSetting = SceneSetting.NeighborYard;
+                if (previousSceneSetting == SceneSetting.OutsideHouse)
+                {
+                    FindObjectOfType<SceneStart>().OutsideHouseToNeighborYard();
+                }
+                break;
         }
     }
 
