@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed = 3f;
     Vector2 moveInput;
 
+    public bool pausePlayerMovement = false;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (pausePlayerMovement) { return; }
         Walk();
     }
 
