@@ -48,4 +48,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("LookX", lookDirection.x);
         animator.SetFloat("LookY", lookDirection.y);
     }
+
+    public void PausePlayerMovement()
+    {
+        pausePlayerMovement = true;
+        rb2d.velocity = new Vector2(0, 0);
+    }
 }

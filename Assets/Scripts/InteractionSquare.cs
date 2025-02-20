@@ -77,8 +77,8 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.Neighbor)
             {
                 dialogText.text = "Hi there! Would you like some water?";
-                FindObjectOfType<Health>().IncreaseWater(50);
-                // TODO: Max increase water stat.
+                PausePlayerMovement();
+                StartCoroutine(NextDialog());
             }
 
             dialogCanvas.SetActive(true);
@@ -106,8 +106,6 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogCanvas.SetActive(false);
                 SceneManager.LoadScene(2);
-                // TODO: Load beach scene.
-                // SceneManager.LoadScene(5);
             }
             hasInteracted = true;
         }
@@ -138,6 +136,11 @@ public class InteractionSquare : MonoBehaviour
         {
             dialogText.text = "Well, let's go for a walk then!";
         }
+        else if (interactionType == InteractionType.Neighbor)
+        {
+            dialogText.text = "Here you go!";
+            FindObjectOfType<Health>().MaxWater();
+        }
 
         yield return new WaitForSeconds(2.5f);
         ResumePlayerMovement();
@@ -147,6 +150,11 @@ public class InteractionSquare : MonoBehaviour
             yield return new WaitForSeconds(1f);
             // TODO: Fade to black?
             SceneManager.LoadScene(2);
+        }
+        else if (interactionType == InteractionType.Neighbor)
+        {
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
         }
     }
 
@@ -163,7 +171,7 @@ public class InteractionSquare : MonoBehaviour
 
     void PausePlayerMovement()
     {
-        FindObjectOfType<PlayerMovement>().pausePlayerMovement = true;
+        FindObjectOfType<PlayerMovement>().PausePlayerMovement();
     }
 
     void ResumePlayerMovement()

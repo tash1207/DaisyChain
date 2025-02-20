@@ -14,7 +14,12 @@ public class Health : MonoBehaviour
     int soilHealth = 50;
     int sunHealth = 50;
     int waterHealth = 50;
-    
+    int maxValue = 100;
+
+    public bool maxedAir = false;
+    public bool maxedSoil = false;
+    public bool maxedSun = false;
+    public bool maxedWater = false;
 
     void Start()
     {
@@ -70,5 +75,12 @@ public class Health : MonoBehaviour
     {
         waterHealth += value;
         waterSlider.value = waterHealth;
+    }
+
+    public void MaxWater()
+    {
+        waterHealth = maxValue;
+        waterSlider.value = waterHealth;
+        maxedWater = true;
     }
 }
