@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Outside of House.unity
     guid: 49362632941284e4a971d420ec8132a6
+  - enabled: 1
+    path: Assets/Scenes/Neighbor Yard.unity
+    guid: f4f8e44e540221d42b8a651dff2d3d2d
   m_configObjects: {}

@@ -13,18 +13,35 @@ public class InteractionSquare : MonoBehaviour
 
     public enum InteractionType
     {
+        BinCompost,
+        BinTrash,
         Collar,
         Fridge,
         FrontDoor,
         Human,
         Plant,
+        OutsideHouseLeft,
+        OutsideHouseDown,
+        OutsideHouseUp,
+        NeighborRight,
+        NeighborUp,
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            if (interactionType == InteractionType.Collar)
+            if (interactionType == InteractionType.BinCompost)
+            {
+                dialogText.text = "Yum!";
+                // TODO: Increase soil stat.
+            }
+            else if (interactionType == InteractionType.BinTrash)
+            {
+                dialogText.text = "Ew gross!";
+                // TODO: Decrease soil stat.
+            }
+            else if (interactionType == InteractionType.Collar)
             {
                 dialogText.text = "Ooh shiny! Yoink!";
                 PausePlayerMovement();
@@ -51,7 +68,33 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogText.text = "Hello friend!";
             }
+
             dialogCanvas.SetActive(true);
+
+            if (interactionType == InteractionType.OutsideHouseLeft)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(3);
+            }
+            else if (interactionType == InteractionType.OutsideHouseDown)
+            {
+                Debug.Log("Coming soon");
+                // TODO: Load construction scene.
+                // SceneManager.LoadScene(4);
+            }
+            else if (interactionType == InteractionType.OutsideHouseUp)
+            {
+                Debug.Log("Sorry, not yet");
+                // TODO: Load beach scene.
+                // SceneManager.LoadScene(5);
+            }
+            else if (interactionType == InteractionType.NeighborRight)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(2);
+                // TODO: Load beach scene.
+                // SceneManager.LoadScene(5);
+            }
         }
     }
 
