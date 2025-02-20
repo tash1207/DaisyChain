@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class HumanMovement : MonoBehaviour
 {
     Rigidbody2D rb2d;
     Animator animator;
 
     Vector2 lookDirection = new Vector2(0, -1);
-    float moveSpeed = 3f;
-    Vector2 moveInput;
-
-    public bool pausePlayerMovement = false;
 
     void Start()
     {
@@ -22,26 +17,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (pausePlayerMovement) { return; }
-        Walk();
-    }
-
-    void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-    }
-
-    void Walk()
-    {
-        rb2d.velocity = moveInput * moveSpeed;
+        // TODO: Determine if connecting this to Daisy's X, Y, and movement is better.
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rb2d.velocity.x) > Mathf.Epsilon;
         bool playerHasVerticalSpeed = Mathf.Abs(rb2d.velocity.y) > Mathf.Epsilon;
         animator.SetBool("isWalking", playerHasHorizontalSpeed || playerHasVerticalSpeed);
 
-        if (!Mathf.Approximately(moveInput.x, 0.0f) || !Mathf.Approximately(moveInput.y, 0.0f))
+        if (!Mathf.Approximately(rb2d.velocity.x, 0.0f) || !Mathf.Approximately(rb2d.velocity.y, 0.0f))
         {
-            lookDirection.Set(moveInput.x, moveInput.y);
+            lookDirection.Set(rb2d.velocity.x, rb2d.velocity.y);
             lookDirection.Normalize();
         }
 
@@ -49,11 +33,9 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("LookY", lookDirection.y);
     }
 
-    public void PausePlayerMovement()
+    public void StopHumanMovement()
     {
-        pausePlayerMovement = true;
         rb2d.velocity = new Vector2(0, 0);
-        FindObjectOfType<HumanMovement>().StopHumanMovement();
         animator.SetBool("isWalking", false);
     }
 }
