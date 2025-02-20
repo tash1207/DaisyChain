@@ -46,12 +46,14 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogText.text = "Yum!";
                 FindObjectOfType<Health>().IncreaseSoil(20);
+                PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.BinTrash)
             {
                 dialogText.text = "Ew gross!";
                 FindObjectOfType<Health>().DecreaseSoil(20);
+                PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.Collar)
@@ -133,7 +135,7 @@ public class InteractionSquare : MonoBehaviour
     IEnumerator OneTimeUse()
     {
         hasInteracted = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         if (collectible != null)
         {
