@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,15 @@ public class Health : MonoBehaviour
     [SerializeField] Slider sunSlider;
     [SerializeField] Slider waterSlider;
 
+    [SerializeField] TMP_Text airText;
+    [SerializeField] TMP_Text soilText;
+    [SerializeField] TMP_Text sunText;
+    [SerializeField] TMP_Text waterText;
+
     int airHealth = 20;
-    int soilHealth = 50;
-    int sunHealth = 50;
-    int waterHealth = 50;
+    int soilHealth = 40;
+    int sunHealth = 40;
+    int waterHealth = 40;
     int maxValue = 100;
 
     public bool maxedAir = false;
@@ -43,14 +49,33 @@ public class Health : MonoBehaviour
 
     public void DecreaseSoil(int value)
     {
+        StartCoroutine(DecreaseSoilDelay(value));
+    }
+
+    IEnumerator DecreaseSoilDelay(int value)
+    {
+        yield return new WaitForSeconds(1f);
+        soilText.color = Color.red;
+        yield return new WaitForSeconds(0.75f);
+        // TODO: Set a min of 0.
         soilHealth -= value;
         soilSlider.value = soilHealth;
+        StartCoroutine(ChangeBackToWhite(soilText));
     }
 
     public void IncreaseSoil(int value)
     {
+        StartCoroutine(IncreaseSoilDelay(value));
+    }
+
+    IEnumerator IncreaseSoilDelay(int value)
+    {
+        yield return new WaitForSeconds(1f);
+        soilText.color = Color.green;
+        yield return new WaitForSeconds(0.75f);
         soilHealth += value;
         soilSlider.value = soilHealth;
+        StartCoroutine(ChangeBackToWhite(soilText));
     }
 
     public void DecreaseSun(int value)
@@ -67,20 +92,43 @@ public class Health : MonoBehaviour
 
     public void DecreaseWater(int value)
     {
+        StartCoroutine(DecreaseWaterDelay(value));
+    }
+
+    IEnumerator DecreaseWaterDelay(int value)
+    {
+        yield return new WaitForSeconds(1f);
+        waterText.color = Color.red;
+        yield return new WaitForSeconds(0.75f);
         waterHealth -= value;
         waterSlider.value = waterHealth;
+        StartCoroutine(ChangeBackToWhite(waterText));
     }
 
     public void IncreaseWater(int value)
     {
+        StartCoroutine(IncreaseWaterDelay(value));
+    }
+
+    IEnumerator IncreaseWaterDelay(int value)
+    {
+        yield return new WaitForSeconds(1f);
+        waterText.color = Color.green;
+        yield return new WaitForSeconds(0.75f);
         waterHealth += value;
         waterSlider.value = waterHealth;
+        StartCoroutine(ChangeBackToWhite(waterText));
+    }
+
+    IEnumerator ChangeBackToWhite(TMP_Text text)
+    {
+        yield return new WaitForSeconds(0.5f);
+        text.color = Color.white; 
     }
 
     public void MaxWater()
     {
-        waterHealth = maxValue;
-        waterSlider.value = waterHealth;
         maxedWater = true;
+        IncreaseWater(maxValue - waterHealth);
     }
 }
