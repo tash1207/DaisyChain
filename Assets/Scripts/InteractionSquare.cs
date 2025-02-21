@@ -156,7 +156,8 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.Sunbathe)
             {
                 dialogText.text = "Time to take in some sunshine!";
-                FindObjectOfType<Health>().MaxSun();
+                PausePlayerMovement();
+                StartCoroutine(NextDialog());
             }
 
             dialogCanvas.SetActive(true);
@@ -293,6 +294,24 @@ public class InteractionSquare : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        else if (interactionType == InteractionType.Sunbathe)
+            {
+                dialogText.text = "Mmm that's the stuff!";
+                FindObjectOfType<Health>().MaxSun();
+
+                yield return new WaitForSeconds(2f);
+                if (!FindObjectOfType<GameLogic>().happinessFromBeach)
+                {
+                    dialogText.text = "That Vitamin D made me feel a little better too :)";
+                    FindObjectOfType<Health>().ShowMood();
+                    yield return new WaitForSeconds(1.5f);
+                    FindObjectOfType<Health>().IncreaseMood(25);
+                    FindObjectOfType<GameLogic>().happinessFromBeach = true;
+                    yield return new WaitForSeconds(1f);
+                }
+                ResumePlayerMovement();
+                Destroy(gameObject);
+            }
     }
 
     void OnTriggerExit2D(Collider2D collision)

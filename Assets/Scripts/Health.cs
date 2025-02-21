@@ -101,8 +101,17 @@ public class Health : MonoBehaviour
 
     public void IncreaseSun(int value)
     {
+        StartCoroutine(IncreaseSunDelay(value));
+    }
+
+    IEnumerator IncreaseSunDelay(int value)
+    {
+        yield return new WaitForSeconds(1f);
+        sunText.color = Color.green;
+        yield return new WaitForSeconds(0.75f);
         sunHealth += value;
         sunSlider.value = sunHealth;
+        StartCoroutine(ChangeBackToWhite(sunText));
     }
 
     public void DecreaseWater(int value)
