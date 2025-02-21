@@ -37,6 +37,23 @@ public class InteractionSquare : MonoBehaviour
         ConstructionTopRight,
         Worker,
         ConstructionWater,
+        MissingKey,
+    }
+
+    void Start()
+    {
+        // Hacky way to make sure the canonical game logic is checked.
+        foreach (GameLogic gameLogic in FindObjectsOfType<GameLogic>())
+        {
+            if (gameLogic.foundWaterValveKey)
+            {
+                if (interactionType == InteractionType.MissingKey)
+                {
+                    Destroy(gameObject);
+                    break;
+                }
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -46,14 +63,14 @@ public class InteractionSquare : MonoBehaviour
         {
             if (interactionType == InteractionType.BinCompost)
             {
-                dialogText.text = "Yum!";
+                dialogText.text = "Compost is yummy!";
                 FindObjectOfType<Health>().IncreaseSoil(20);
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.BinTrash)
             {
-                dialogText.text = "Ew gross!";
+                dialogText.text = "Trash is gross!";
                 FindObjectOfType<Health>().DecreaseSoil(20);
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
@@ -87,22 +104,50 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Neighbor)
             {
-                // TODO: First mention that the water isn't working.
-                dialogText.text = "Hi there! Would you like some water?";
-                PausePlayerMovement();
-                StartCoroutine(NextDialog());
+                if (!FindObjectOfType<GameLogic>().waterTurnedOn)
+                {
+                    dialogText.text =
+                    "I'm trying to water my garden but the hose doesn't seem to be working.";
+                }
+                else
+                {
+                    dialogText.text = "Hi there! Would you like some water?";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
             }
             else if (interactionType == InteractionType.Worker)
             {
-                // TODO: First turn on water.
-                dialogText.text = "Hi there! Would you like some soil?";
-                PausePlayerMovement();
-                StartCoroutine(NextDialog());
+                if (!FindObjectOfType<GameLogic>().foundWaterValveKey)
+                {
+                    dialogText.text = "Sorry Casey, I can't talk right now. I'm in big trouble.";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
+                else if (!FindObjectOfType<GameLogic>().waterTurnedOn)
+                {
+                    dialogText.text = "You found the key to the water shut off valve! Now I can turn the water back on!";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
+                else
+                {
+                    dialogText.text = "You're my hero! Would you like some soil?";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
             }
             else if (interactionType == InteractionType.ConstructionWater)
             {
                 dialogText.text = "*spit take* :(";
                 FindObjectOfType<Health>().DecreaseWater(20);
+                PausePlayerMovement();
+                StartCoroutine(OneTimeUse());
+            }
+            else if (interactionType == InteractionType.MissingKey)
+            {
+                dialogText.text = "Ooh a key! This looks useful!";
+                FindObjectOfType<GameLogic>().foundWaterValveKey = true;
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
@@ -165,6 +210,10 @@ public class InteractionSquare : MonoBehaviour
         {
             FindObjectOfType<Collar>().WearCollar();
         }
+        else if (interactionType == InteractionType.MissingKey)
+        {
+            //FindObjectOfType<Collar>().WearCollar();
+        }
         ResumePlayerMovement();
     }
 
@@ -197,17 +246,34 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Worker)
         {
-            dialogText.text = "Here you go!";
-            FindObjectOfType<Health>().MaxSoil();
-            yield return new WaitForSeconds(2.5f);
+            if (!FindObjectOfType<GameLogic>().foundWaterValveKey)
+            {
+                dialogText.text = "I lost the key to the water shut off valve. The whole street doesn't have any water.";
+                yield return new WaitForSeconds(3f);
+                ResumePlayerMovement();
+            }
+            else if (!FindObjectOfType<GameLogic>().waterTurnedOn)
+            {
+                FindObjectOfType<GameLogic>().waterTurnedOn = true;
+                dialogText.text = "Thank you so so much!";
+                yield return new WaitForSeconds(2f);
+                ResumePlayerMovement();
+                Destroy(gameObject);
+            }
+            else
+            {
+                dialogText.text = "Here you go!";
+                FindObjectOfType<Health>().MaxSoil();
+                yield return new WaitForSeconds(2.5f);
 
-            dialogText.text = "Hey Casey! It's good to see you!";
-            yield return new WaitForSeconds(2f);
+                dialogText.text = "Hey Casey! It's good to see you!";
+                yield return new WaitForSeconds(2f);
 
-            ResumePlayerMovement();
-            yield return new WaitForSeconds(1f);
+                ResumePlayerMovement();
+                yield return new WaitForSeconds(1f);
 
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 

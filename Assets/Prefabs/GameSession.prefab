@@ -123,6 +123,14 @@ MonoBehaviour:
   soilSlider: {fileID: 7416388203273108399}
   sunSlider: {fileID: 9109928401925462420}
   waterSlider: {fileID: 5180516273987210166}
+  airText: {fileID: 0}
+  soilText: {fileID: 0}
+  sunText: {fileID: 0}
+  waterText: {fileID: 0}
+  maxedAir: 0
+  maxedSoil: 0
+  maxedSun: 0
+  maxedWater: 0
 --- !u!1 &8146226348884034594
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186776533392740512}
   - component: {fileID: 8151771177015704224}
+  - component: {fileID: 3494612642822753751}
   m_Layer: 0
   m_Name: GameSession
   m_TagString: Untagged
@@ -166,6 +175,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0afde4bcdb677264894f5ee67f3fd1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previousSceneSetting: 3
+  currentSceneSetting: 3
+--- !u!114 &3494612642822753751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146226348884034594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89552d5d8d3ff1438302996f73e8d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8801025064657191189
