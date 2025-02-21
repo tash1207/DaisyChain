@@ -39,6 +39,7 @@ public class InteractionSquare : MonoBehaviour
         ConstructionWater,
         MissingKey,
         BeachDown,
+        Sunbathe,
     }
 
     void Start()
@@ -151,6 +152,11 @@ public class InteractionSquare : MonoBehaviour
                 FindObjectOfType<GameLogic>().foundWaterValveKey = true;
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
+            }
+            else if (interactionType == InteractionType.Sunbathe)
+            {
+                dialogText.text = "Time to take in some sunshine!";
+                FindObjectOfType<Health>().MaxSun();
             }
 
             dialogCanvas.SetActive(true);

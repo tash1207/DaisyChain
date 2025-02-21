@@ -147,6 +147,12 @@ public class Health : MonoBehaviour
         IncreaseSoil(maxValue - soilHealth);
     }
 
+    public void MaxSun()
+    {
+        maxedSun = true;
+        IncreaseSun(maxValue - sunHealth);
+    }
+
     public void MaxWater()
     {
         maxedWater = true;
