@@ -50,6 +50,9 @@ public class InteractionSquare : MonoBehaviour
         BeachDown,
         Sunbathe,
         EndGame,
+        Sink,
+        Bookcase,
+        Lamp,
     }
 
     void Start()
@@ -113,12 +116,12 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.Fridge)
             {
                 SpeakerDaisy();
-                dialogText.text = "Yuck! That is definitely not what plants crave.";
+                dialogText.text = "Yuck! That is definitely not what plants crave. I need soil.";
             }
             else if (interactionType == InteractionType.FrontDoor)
             {
                 SpeakerDaisy();
-                dialogText.text = "Let me out of here!";
+                dialogText.text = "Let me out of here! I need air!";
             }
             else if (interactionType == InteractionType.Human)
             {
@@ -175,7 +178,7 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.ConstructionWater)
             {
                 SpeakerDaisy();
-                dialogText.text = "*spit take* :(";
+                dialogText.text = "*spit take*\nPretty sure that was sewer water :(";
                 FindObjectOfType<Health>().DecreaseWater(20);
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
@@ -216,6 +219,21 @@ public class InteractionSquare : MonoBehaviour
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
                 }
+            }
+            else if (interactionType == InteractionType.Sink)
+            {
+                SpeakerDaisy();
+                dialogText.text = "Why isn't the sink working? I need water!";
+            }
+            else if (interactionType == InteractionType.Bookcase)
+            {
+                SpeakerDaisy();
+                dialogText.text = "I wish I knew how to read!";
+            }
+            else if (interactionType == InteractionType.Lamp)
+            {
+                SpeakerDaisy();
+                dialogText.text = "This lamp ain't cutting it. I need real sunlight.";
             }
 
             dialogCanvas.SetActive(true);
@@ -266,7 +284,14 @@ public class InteractionSquare : MonoBehaviour
     IEnumerator OneTimeUse()
     {
         hasInteracted = true;
-        yield return new WaitForSeconds(1.5f);
+        if (interactionType == InteractionType.ConstructionWater)
+        {
+            yield return new WaitForSeconds(2.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+        }
 
         if (collectible != null)
         {
