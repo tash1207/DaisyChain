@@ -37,7 +37,11 @@ public class GameSession : MonoBehaviour
         {
             case 2:
                 currentSceneSetting = SceneSetting.OutsideHouse;
-                if (previousSceneSetting == SceneSetting.Construction)
+                if (previousSceneSetting == SceneSetting.Beach)
+                {
+                    FindObjectOfType<SceneStart>().BeachToOutsideHouse();
+                }
+                else if (previousSceneSetting == SceneSetting.Construction)
                 {
                     FindObjectOfType<SceneStart>().ConstructionToOutsideHouse();
                 }
@@ -67,6 +71,9 @@ public class GameSession : MonoBehaviour
                 {
                     FindObjectOfType<SceneStart>().OutsideHouseToConstruction();
                 }
+                break;
+            case 5:
+                currentSceneSetting = SceneSetting.Beach;
                 break;
         }
     }

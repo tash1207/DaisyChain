@@ -25,6 +25,9 @@ public class SceneStart : MonoBehaviour
     Vector2 outsideHouseLeftDaisy = new Vector2(-7f, -2.7f);
     Vector2 outsideHouseLeftHuman = new Vector2(-8f, -2.7f);
 
+    Vector2 outsideHouseTopDaisy = new Vector2(7.5f, 4f);
+    Vector2 outsideHouseTopHuman = new Vector2(8.5f, 4f);
+
     void Start()
     {
         // Hacky way to make sure the canonical game session is updated.
@@ -32,6 +35,13 @@ public class SceneStart : MonoBehaviour
         {
             gameSession.SetSceneSettings();
         }
+    }
+
+    public void BeachToOutsideHouse()
+    {
+        // Set position to the top right of screen.
+        daisy.transform.position = outsideHouseTopDaisy;
+        human.transform.position = outsideHouseTopHuman;
     }
 
     public void ConstructionToNeighborYard()

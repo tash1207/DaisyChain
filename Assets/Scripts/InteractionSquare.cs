@@ -38,6 +38,7 @@ public class InteractionSquare : MonoBehaviour
         Worker,
         ConstructionWater,
         MissingKey,
+        BeachDown,
     }
 
     void Start()
@@ -167,9 +168,7 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.OutsideHouseUp)
             {
                 dialogCanvas.SetActive(false);
-                Debug.Log("Sorry, not yet");
-                // TODO: Load beach scene.
-                // SceneManager.LoadScene(beachSceneIndex);
+                SceneManager.LoadScene(beachSceneIndex);
             }
             else if (interactionType == InteractionType.NeighborRight)
             {
@@ -187,6 +186,11 @@ public class InteractionSquare : MonoBehaviour
                 SceneManager.LoadScene(neighborYardSceneIndex);
             }
             else if (interactionType == InteractionType.ConstructionTopRight)
+            {
+                dialogCanvas.SetActive(false);
+                SceneManager.LoadScene(outsideHouseSceneIndex);
+            }
+            else if (interactionType == InteractionType.BeachDown)
             {
                 dialogCanvas.SetActive(false);
                 SceneManager.LoadScene(outsideHouseSceneIndex);
