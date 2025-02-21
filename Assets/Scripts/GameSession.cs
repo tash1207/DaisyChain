@@ -13,8 +13,8 @@ public class GameSession : MonoBehaviour
         OutsideHouse,
     }
 
-    SceneSetting previousSceneSetting = SceneSetting.OutsideHouse;
-    SceneSetting currentSceneSetting = SceneSetting.OutsideHouse;
+    public SceneSetting previousSceneSetting = SceneSetting.OutsideHouse;
+    public SceneSetting currentSceneSetting = SceneSetting.OutsideHouse;
 
     void Awake()
     {

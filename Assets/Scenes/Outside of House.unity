@@ -5881,6 +5881,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSession
       objectReference: {fileID: 0}
+    - target: {fileID: 8151771177015704224, guid: 23693f54b854fd342a82f58d3411fbca, type: 3}
+      propertyPath: currentSceneSetting
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151771177015704224, guid: 23693f54b854fd342a82f58d3411fbca, type: 3}
+      propertyPath: previousSceneSetting
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

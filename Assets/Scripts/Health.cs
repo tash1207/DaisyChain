@@ -126,6 +126,12 @@ public class Health : MonoBehaviour
         text.color = Color.white; 
     }
 
+    public void MaxSoil()
+    {
+        maxedSoil = true;
+        IncreaseSoil(maxValue - soilHealth);
+    }
+
     public void MaxWater()
     {
         maxedWater = true;

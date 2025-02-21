@@ -35,6 +35,8 @@ public class InteractionSquare : MonoBehaviour
         Neighbor,
         ConstructionTopLeft,
         ConstructionTopRight,
+        Worker,
+        ConstructionWater,
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -85,9 +87,24 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Neighbor)
             {
+                // TODO: First mention that the water isn't working.
                 dialogText.text = "Hi there! Would you like some water?";
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
+            }
+            else if (interactionType == InteractionType.Worker)
+            {
+                // TODO: First turn on water.
+                dialogText.text = "Hi there! Would you like some soil?";
+                PausePlayerMovement();
+                StartCoroutine(NextDialog());
+            }
+            else if (interactionType == InteractionType.ConstructionWater)
+            {
+                dialogText.text = "*spit take* :(";
+                FindObjectOfType<Health>().DecreaseWater(20);
+                PausePlayerMovement();
+                StartCoroutine(OneTimeUse());
             }
 
             dialogCanvas.SetActive(true);
@@ -172,6 +189,20 @@ public class InteractionSquare : MonoBehaviour
 
             dialogText.text = "It's good to see you outside, Casey! We miss you at book club!";
             yield return new WaitForSeconds(2.5f);
+
+            ResumePlayerMovement();
+            yield return new WaitForSeconds(1f);
+
+            Destroy(gameObject);
+        }
+        else if (interactionType == InteractionType.Worker)
+        {
+            dialogText.text = "Here you go!";
+            FindObjectOfType<Health>().MaxSoil();
+            yield return new WaitForSeconds(2.5f);
+
+            dialogText.text = "Hey Casey! It's good to see you!";
+            yield return new WaitForSeconds(2f);
 
             ResumePlayerMovement();
             yield return new WaitForSeconds(1f);
