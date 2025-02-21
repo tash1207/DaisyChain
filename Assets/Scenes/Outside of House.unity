@@ -5804,6 +5804,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3459117160117083942, guid: 23693f54b854fd342a82f58d3411fbca, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3665990150093712335, guid: 23693f54b854fd342a82f58d3411fbca, type: 3}
       propertyPath: m_fontColor.b
       value: 1

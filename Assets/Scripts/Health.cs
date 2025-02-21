@@ -20,10 +20,10 @@ public class Health : MonoBehaviour
     [SerializeField] TMP_Text waterText;
     [SerializeField] TMP_Text moodText;
 
-    int airHealth = 20;
-    int soilHealth = 40;
+    float airHealth = 15;
+    int soilHealth = 30;
     int sunHealth = 40;
-    int waterHealth = 40;
+    int waterHealth = 30;
     int moodHealth = 0;
     int maxValue = 100;
 
@@ -31,6 +31,8 @@ public class Health : MonoBehaviour
     public bool maxedSoil = false;
     public bool maxedSun = false;
     public bool maxedWater = false;
+
+    float airPerSecond = 0.8f;
 
     void Start()
     {
@@ -40,13 +42,21 @@ public class Health : MonoBehaviour
         waterSlider.value = waterHealth;
     }
 
-    public void DecreaseAir(int value)
+    void Update()
+    {
+        if (airHealth < maxValue)
+        {
+            IncreaseAir(airPerSecond * Time.deltaTime);
+        }
+    }
+
+    public void DecreaseAir(float value)
     {
         airHealth -= value;
         airSlider.value = airHealth;
     }
 
-    public void IncreaseAir(int value)
+    public void IncreaseAir(float value)
     {
         airHealth += value;
         airSlider.value = airHealth;
