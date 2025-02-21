@@ -6,20 +6,25 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] GameObject moodMeter;
+
     [SerializeField] Slider airSlider;
     [SerializeField] Slider soilSlider;
     [SerializeField] Slider sunSlider;
     [SerializeField] Slider waterSlider;
+    [SerializeField] Slider moodSlider;
 
     [SerializeField] TMP_Text airText;
     [SerializeField] TMP_Text soilText;
     [SerializeField] TMP_Text sunText;
     [SerializeField] TMP_Text waterText;
+    [SerializeField] TMP_Text moodText;
 
     int airHealth = 20;
     int soilHealth = 40;
     int sunHealth = 40;
     int waterHealth = 40;
+    int moodHealth = 0;
     int maxValue = 100;
 
     public bool maxedAir = false;
@@ -136,5 +141,24 @@ public class Health : MonoBehaviour
     {
         maxedWater = true;
         IncreaseWater(maxValue - waterHealth);
+    }
+
+    public void ShowMood()
+    {
+        moodMeter.SetActive(true);
+    }
+
+    public void DecreaseMood(int value)
+    {
+        moodMeter.SetActive(true);
+        moodHealth -= value;
+        moodSlider.value = moodHealth;
+    }
+
+    public void IncreaseMood(int value)
+    {
+        moodMeter.SetActive(true);
+        moodHealth += value;
+        moodSlider.value = moodHealth;
     }
 }

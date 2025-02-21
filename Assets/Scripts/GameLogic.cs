@@ -6,4 +6,8 @@ public class GameLogic : MonoBehaviour
 {
     public bool foundWaterValveKey = false;
     public bool waterTurnedOn = false;
+
+    public bool happinessFromNeighbor = false;
+    public bool happinessFromConstruction = false;
+    public bool happinessFromBeach = false;
 }

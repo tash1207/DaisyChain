@@ -111,7 +111,7 @@ public class InteractionSquare : MonoBehaviour
                 }
                 else
                 {
-                    dialogText.text = "Hi there! Would you like some water?";
+                    dialogText.text = "I'm so happy that my hose is working again. Would you like some water?";
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
                 }
@@ -236,12 +236,16 @@ public class InteractionSquare : MonoBehaviour
             FindObjectOfType<Health>().MaxWater();
             yield return new WaitForSeconds(2.5f);
 
-            dialogText.text = "It's good to see you outside, Casey! We miss you at book club!";
-            yield return new WaitForSeconds(2.5f);
-
+            if (!FindObjectOfType<GameLogic>().happinessFromNeighbor)
+            {
+                dialogText.text = "It's good to see you outside, Casey! We miss you at book club!";
+                FindObjectOfType<Health>().ShowMood();
+                yield return new WaitForSeconds(1.5f);
+                FindObjectOfType<Health>().IncreaseMood(25);
+                FindObjectOfType<GameLogic>().happinessFromNeighbor = true;
+                yield return new WaitForSeconds(1.5f);
+            }
             ResumePlayerMovement();
-            yield return new WaitForSeconds(1f);
-
             Destroy(gameObject);
         }
         else if (interactionType == InteractionType.Worker)
@@ -264,14 +268,18 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogText.text = "Here you go!";
                 FindObjectOfType<Health>().MaxSoil();
-                yield return new WaitForSeconds(2.5f);
-
-                dialogText.text = "Hey Casey! It's good to see you!";
                 yield return new WaitForSeconds(2f);
 
+                if (!FindObjectOfType<GameLogic>().happinessFromConstruction)
+                {
+                    dialogText.text = "Hey Casey! It's good to see you!";
+                    FindObjectOfType<Health>().ShowMood();
+                    yield return new WaitForSeconds(1.5f);
+                    FindObjectOfType<Health>().IncreaseMood(25);
+                    FindObjectOfType<GameLogic>().happinessFromConstruction = true;
+                    yield return new WaitForSeconds(1f);
+                }
                 ResumePlayerMovement();
-                yield return new WaitForSeconds(1f);
-
                 Destroy(gameObject);
             }
         }
