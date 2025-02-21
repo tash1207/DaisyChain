@@ -144,5 +144,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 1
+  collectible: {fileID: 0}
   dialogCanvas: {fileID: 0}
   dialogText: {fileID: 0}
+  dialogImage: {fileID: 0}
+  daisySprite: {fileID: 21300000, guid: 654f760b31d4b2f44a209c6cceed3135, type: 3}
+  humanSprite: {fileID: 1556004155, guid: 418ffeb4c4aa2db4ba466af71147f5d1, type: 3}
+  neighborSprite: {fileID: 1323683284, guid: 418ffeb4c4aa2db4ba466af71147f5d1, type: 3}
+  workerSprite: {fileID: 1937154315, guid: 7c4196a9d5f65ce4f8355e85bedb9017, type: 3}

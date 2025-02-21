@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class InteractionSquare : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] GameObject collectible;
     [SerializeField] GameObject dialogCanvas;
     [SerializeField] TMP_Text dialogText;
+    [SerializeField] Image dialogImage;
+
+    [SerializeField] Sprite daisySprite;
+    [SerializeField] Sprite humanSprite;
+    [SerializeField] Sprite neighborSprite;
+    [SerializeField] Sprite workerSprite;
 
     bool hasInteracted = false;
 
@@ -65,6 +72,7 @@ public class InteractionSquare : MonoBehaviour
         {
             if (interactionType == InteractionType.BinCompost)
             {
+                SpeakerDaisy();
                 dialogText.text = "Compost is yummy!";
                 FindObjectOfType<Health>().IncreaseSoil(20);
                 PausePlayerMovement();
@@ -72,6 +80,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.BinTrash)
             {
+                SpeakerDaisy();
                 dialogText.text = "Trash is gross!";
                 FindObjectOfType<Health>().DecreaseSoil(20);
                 PausePlayerMovement();
@@ -79,20 +88,24 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Collar)
             {
+                SpeakerDaisy();
                 dialogText.text = "Ooh shiny! Yoink!";
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
             else if (interactionType == InteractionType.Fridge)
             {
+                SpeakerDaisy();
                 dialogText.text = "Yuck! That is definitely not what plants crave.";
             }
             else if (interactionType == InteractionType.FrontDoor)
             {
+                SpeakerDaisy();
                 dialogText.text = "Let me out of here!";
             }
             else if (interactionType == InteractionType.Human)
             {
+                SpeakerHuman();
                 dialogText.text = "Aah! You can walk?";
                 if (FindObjectOfType<Collar>().IsWearingCollar())
                 {
@@ -102,10 +115,12 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Plant)
             {
+                SpeakerDaisy();
                 dialogText.text = "Hello friend!";
             }
             else if (interactionType == InteractionType.Neighbor)
             {
+                SpeakerNeighbor();
                 if (!FindObjectOfType<GameLogic>().waterTurnedOn)
                 {
                     dialogText.text =
@@ -120,6 +135,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Worker)
             {
+                SpeakerWorker();
                 if (!FindObjectOfType<GameLogic>().foundWaterValveKey)
                 {
                     dialogText.text = "Sorry Casey, I can't talk right now. I'm in big trouble.";
@@ -141,6 +157,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.ConstructionWater)
             {
+                SpeakerDaisy();
                 dialogText.text = "*spit take* :(";
                 FindObjectOfType<Health>().DecreaseWater(20);
                 PausePlayerMovement();
@@ -148,6 +165,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.MissingKey)
             {
+                SpeakerDaisy();
                 dialogText.text = "Ooh a key! This looks useful!";
                 FindObjectOfType<GameLogic>().foundWaterValveKey = true;
                 PausePlayerMovement();
@@ -155,6 +173,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Sunbathe)
             {
+                SpeakerDaisy();
                 dialogText.text = "Time to take in some sunshine!";
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
@@ -223,6 +242,7 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.MissingKey)
         {
+            // TODO: Maybe wear the key. Or show it in inventory somehow.
             //FindObjectOfType<Collar>().WearCollar();
         }
         ResumePlayerMovement();
@@ -233,6 +253,7 @@ public class InteractionSquare : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         if (interactionType == InteractionType.Human)
         {
+            SpeakerHuman();
             dialogText.text = "Well, I guess we can go for a walk.";
             yield return new WaitForSeconds(2.5f);
 
@@ -243,6 +264,7 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Neighbor)
         {
+            SpeakerNeighbor();
             dialogText.text = "Here you go!";
             FindObjectOfType<Health>().MaxWater();
             yield return new WaitForSeconds(2.5f);
@@ -261,6 +283,7 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Worker)
         {
+            SpeakerWorker();
             if (!FindObjectOfType<GameLogic>().foundWaterValveKey)
             {
                 dialogText.text = "I lost the key to the water shut off valve. The whole street doesn't have any water.";
@@ -296,12 +319,14 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Sunbathe)
             {
+                SpeakerDaisy();
                 dialogText.text = "Mmm that's the stuff!";
                 FindObjectOfType<Health>().MaxSun();
 
                 yield return new WaitForSeconds(2f);
                 if (!FindObjectOfType<GameLogic>().happinessFromBeach)
                 {
+                    SpeakerHuman();
                     dialogText.text = "That Vitamin D made me feel a little better too :)";
                     FindObjectOfType<Health>().ShowMood();
                     yield return new WaitForSeconds(1.5f);
@@ -333,5 +358,25 @@ public class InteractionSquare : MonoBehaviour
     void ResumePlayerMovement()
     {
         FindObjectOfType<PlayerMovement>().pausePlayerMovement = false;
+    }
+
+    void SpeakerDaisy()
+    {
+        dialogImage.sprite = daisySprite;
+    }
+
+    void SpeakerHuman()
+    {
+        dialogImage.sprite = humanSprite;
+    }
+
+    void SpeakerNeighbor()
+    {
+        dialogImage.sprite = neighborSprite;
+    }
+
+    void SpeakerWorker()
+    {
+        dialogImage.sprite = workerSprite;
     }
 }
