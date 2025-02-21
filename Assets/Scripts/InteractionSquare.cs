@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class InteractionSquare : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] Sprite workerSprite;
 
     bool hasInteracted = false;
+    bool hasReachedEndGame = false;
 
     int outsideHouseSceneIndex = 2;
     int neighborYardSceneIndex = 3;
@@ -47,6 +49,7 @@ public class InteractionSquare : MonoBehaviour
         MissingKey,
         BeachDown,
         Sunbathe,
+        EndGame,
     }
 
     void Start()
@@ -65,11 +68,25 @@ public class InteractionSquare : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (interactionType == InteractionType.EndGame && !hasReachedEndGame)
+        {
+            if (FindObjectOfType<Health>().HasMaxedPlantMeters())
+            {
+                hasReachedEndGame = true;
+                GetComponent<SpriteRenderer>().enabled = true;
+                GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (hasInteracted) { return; }
         if (collision.tag == "Player")
         {
+            Debug.Log("OnTriggerEnter2D");
             if (interactionType == InteractionType.BinCompost)
             {
                 SpeakerDaisy();
@@ -177,6 +194,28 @@ public class InteractionSquare : MonoBehaviour
                 dialogText.text = "Time to take in some sunshine!";
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
+            }
+            else if (interactionType == InteractionType.EndGame)
+            {
+                if (!FindObjectOfType<Health>().HasMaxedPlantMeters())
+                {
+                    SpeakerDaisy();
+                    dialogText.text = "I'm not ready to go inside yet.";
+                }
+                else if (!FindObjectOfType<Health>().HasMaxedHumanMeters())
+                {
+                    SpeakerHuman();
+                    dialogText.text = "You seem like you have everything you need. Let's go inside.";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
+                else
+                {
+                    SpeakerHuman();
+                    dialogText.text = "It's been an eventful day, Daisy.";
+                    PausePlayerMovement();
+                    StartCoroutine(NextDialog());
+                }
             }
 
             dialogCanvas.SetActive(true);
@@ -318,25 +357,44 @@ public class InteractionSquare : MonoBehaviour
             }
         }
         else if (interactionType == InteractionType.Sunbathe)
-            {
-                SpeakerDaisy();
-                dialogText.text = "Mmm that's the stuff!";
-                FindObjectOfType<Health>().MaxSun();
+        {
+            SpeakerDaisy();
+            dialogText.text = "Mmm that's the stuff!";
+            FindObjectOfType<Health>().MaxSun();
 
-                yield return new WaitForSeconds(2f);
-                if (!FindObjectOfType<GameLogic>().happinessFromBeach)
-                {
-                    SpeakerHuman();
-                    dialogText.text = "That Vitamin D made me feel a little better too :)";
-                    FindObjectOfType<Health>().ShowMood();
-                    yield return new WaitForSeconds(1.5f);
-                    FindObjectOfType<Health>().IncreaseMood(25);
-                    FindObjectOfType<GameLogic>().happinessFromBeach = true;
-                    yield return new WaitForSeconds(1f);
-                }
-                ResumePlayerMovement();
-                Destroy(gameObject);
+            yield return new WaitForSeconds(2f);
+            if (!FindObjectOfType<GameLogic>().happinessFromBeach)
+            {
+                SpeakerHuman();
+                dialogText.text = "That Vitamin D made me feel a little better too :)";
+                FindObjectOfType<Health>().ShowMood();
+                yield return new WaitForSeconds(1.5f);
+                FindObjectOfType<Health>().IncreaseMood(25);
+                FindObjectOfType<GameLogic>().happinessFromBeach = true;
+                yield return new WaitForSeconds(1f);
             }
+            ResumePlayerMovement();
+            Destroy(gameObject);
+        }
+        else if (interactionType == InteractionType.EndGame)
+        {
+            SpeakerHuman();
+            if (!FindObjectOfType<Health>().HasMaxedHumanMeters())
+            {
+                dialogText.text = "I need to be alone again.";
+                ResumePlayerMovement();
+                // TODO: Trigger suboptimal game ending.
+            }
+            else
+            {
+                dialogText.text = "Thanks for getting me out of the house.";
+                FindObjectOfType<Health>().ShowMood();
+                yield return new WaitForSeconds(2.5f);
+                FindObjectOfType<Health>().IncreaseMood(25);
+                ResumePlayerMovement();
+                // TODO: Load happy end cutscene.
+            }
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)

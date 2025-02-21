@@ -27,12 +27,7 @@ public class Health : MonoBehaviour
     int moodHealth = 0;
     int maxValue = 100;
 
-    public bool maxedAir = false;
-    public bool maxedSoil = false;
-    public bool maxedSun = false;
-    public bool maxedWater = false;
-
-    float airPerSecond = 0.8f;
+    float airPerSecond = 0.85f;
 
     void Start()
     {
@@ -152,19 +147,16 @@ public class Health : MonoBehaviour
 
     public void MaxSoil()
     {
-        maxedSoil = true;
         IncreaseSoil(maxValue - soilHealth);
     }
 
     public void MaxSun()
     {
-        maxedSun = true;
         IncreaseSun(maxValue - sunHealth);
     }
 
     public void MaxWater()
     {
-        maxedWater = true;
         IncreaseWater(maxValue - waterHealth);
     }
 
@@ -185,5 +177,19 @@ public class Health : MonoBehaviour
         moodMeter.SetActive(true);
         moodHealth += value;
         moodSlider.value = moodHealth;
+    }
+
+    public bool HasMaxedPlantMeters()
+    {
+        bool atMaxAir = airHealth >= maxValue;
+        bool atMaxSoil = soilHealth >= maxValue;
+        bool atMaxSun = sunHealth >= maxValue;
+        bool atMaxWater = waterHealth >= maxValue;
+        return atMaxAir && atMaxSoil && atMaxSun && atMaxWater;
+    }
+
+    public bool HasMaxedHumanMeters()
+    {
+        return moodHealth > 70;
     }
 }
