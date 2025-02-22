@@ -25,6 +25,7 @@ public class InteractionSquare : MonoBehaviour
 
     bool hasInteracted = false;
     bool showingGetTowelSquare = false;
+    bool hasEnabledJoke = false;
     bool hasReachedEndGame = false;
 
     int outsideHouseSceneIndex = 3;
@@ -61,6 +62,7 @@ public class InteractionSquare : MonoBehaviour
         Bookcase,
         Lamp,
         GetTowel,
+        DaisyJoke,
     }
 
     void Start()
@@ -90,6 +92,16 @@ public class InteractionSquare : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = true;
             }
         }
+        else if (interactionType == InteractionType.DaisyJoke && !hasEnabledJoke)
+            {
+                if (FindObjectOfType<Health>().HasMaxedPlantMeters() &&
+                    FindObjectOfType<Health>().HasHappyHumanMeters())
+                {
+                    hasEnabledJoke = true;
+                    // GetComponent<SpriteRenderer>().enabled = true;
+                    GetComponent<BoxCollider2D>().enabled = true;
+                }
+            }
         else if (interactionType == InteractionType.GetTowel && !showingGetTowelSquare &&
             FindObjectOfType<GameLogic>().needsTowel &&
             !FindObjectOfType<GameLogic>().hasTowel)
@@ -265,6 +277,13 @@ public class InteractionSquare : MonoBehaviour
             {
                 SpeakerHuman();
                 dialogText.text = "I'll just grab a towel while we're here.";
+                PausePlayerMovement();
+                StartCoroutine(NextDialog());
+            }
+            else if (interactionType == InteractionType.DaisyJoke)
+            {
+                SpeakerDaisy();
+                dialogText.text = "Hey Casey, what do you call a flower that runs on electricity?";
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
             }
@@ -517,6 +536,21 @@ public class InteractionSquare : MonoBehaviour
             }
             Destroy(gameObject);
             FindObjectOfType<GameLogic>().hasTowel = true;
+            ResumePlayerMovement();
+        }
+        else if (interactionType == InteractionType.DaisyJoke)
+        {
+            SpeakerDaisy();
+            dialogText.text = "A power plant!";
+            yield return new WaitForSeconds(2f);
+
+            SpeakerHuman();
+            dialogText.text = "Hehe I wasn't expecting that.";
+            FindObjectOfType<Health>().ShowMood();
+            yield return new WaitForSeconds(2f);
+            FindObjectOfType<Health>().IncreaseMood(25);
+            yield return new WaitForSeconds(1.5f);
+            Destroy(gameObject);
             ResumePlayerMovement();
         }
     }

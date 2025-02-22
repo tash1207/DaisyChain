@@ -188,8 +188,13 @@ public class Health : MonoBehaviour
         return atMaxAir && atMaxSoil && atMaxSun && atMaxWater;
     }
 
-    public bool HasMaxedHumanMeters()
+    public bool HasHappyHumanMeters()
     {
         return moodHealth > 70;
+    }
+
+    public bool HasMaxedHumanMeters()
+    {
+        return moodHealth == maxValue;
     }
 }
