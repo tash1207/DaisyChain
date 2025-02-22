@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playableDirector: {fileID: 84539462}
+  sceneIndex: 2
 --- !u!1 &149513707
 GameObject:
   m_ObjectHideFlags: 0

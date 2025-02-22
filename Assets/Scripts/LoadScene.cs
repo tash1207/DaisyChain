@@ -8,7 +8,7 @@ public class LoadScene : MonoBehaviour
 {
     public PlayableDirector playableDirector;
 
-    int insideHouseSceneIndex = 2;
+    [SerializeField] int sceneIndex;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class LoadScene : MonoBehaviour
     {
         if (playableDirector == director)
         {
-            SceneManager.LoadScene(insideHouseSceneIndex);
+            SceneManager.LoadScene(sceneIndex);
         }
     }
 }
