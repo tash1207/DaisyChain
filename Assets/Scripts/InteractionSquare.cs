@@ -422,6 +422,16 @@ public class InteractionSquare : MonoBehaviour
         {
             if (FindObjectOfType<GameLogic>().hasTowel)
             {
+                if (moveableObject != null)
+                {
+                    // Hide daisy (and collar) and human and show sunbathing sprites.
+                    GameObject daisy = FindObjectOfType<PlayerMovement>().gameObject;
+                    GameObject human = FindObjectOfType<HumanMovement>().gameObject;
+                    daisy.GetComponent<SpriteRenderer>().enabled = false;
+                    human.GetComponent<SpriteRenderer>().enabled = false;
+                    daisy.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                    moveableObject.SetActive(true);
+                }
                 SpeakerDaisy();
                 dialogText.text = "Mmm that's the stuff!";
                 FindObjectOfType<Health>().MaxSun();
@@ -430,14 +440,24 @@ public class InteractionSquare : MonoBehaviour
                 if (!FindObjectOfType<GameLogic>().happinessFromBeach)
                 {
                     SpeakerHuman();
-                    dialogText.text = "That Vitamin D made me feel a little better too.";
+                    dialogText.text = "This Vitamin D is making me feel a little better too.";
                     FindObjectOfType<Health>().ShowMood();
                     yield return new WaitForSeconds(1.5f);
                     FindObjectOfType<Health>().IncreaseMood(25);
                     FindObjectOfType<GameLogic>().happinessFromBeach = true;
                     yield return new WaitForSeconds(1f);
-                    Destroy(gameObject);
                 }
+                if (moveableObject != null)
+                {
+                    // Show daisy and human.
+                    GameObject daisy = FindObjectOfType<PlayerMovement>().gameObject;
+                    GameObject human = FindObjectOfType<HumanMovement>().gameObject;
+                    daisy.GetComponent<SpriteRenderer>().enabled = true;
+                    human.GetComponent<SpriteRenderer>().enabled = true;
+                    daisy.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                    moveableObject.SetActive(false);
+                }
+                Destroy(gameObject);
             }
             else
             {
