@@ -212,7 +212,14 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.Sunbathe)
             {
                 SpeakerDaisy();
-                dialogText.text = "Time to take in some sunshine!";
+                if (FindObjectOfType<GameLogic>().hasTowel)
+                {
+                    dialogText.text = "Time to take in some sunshine!";
+                }
+                else
+                {
+                    dialogText.text = "Let's take in some sunshine!";
+                }
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
             }
@@ -440,7 +447,7 @@ public class InteractionSquare : MonoBehaviour
                 dialogText.text = "Mmm that's the stuff!";
                 FindObjectOfType<Health>().MaxSun();
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(2.5f);
                 if (!FindObjectOfType<GameLogic>().happinessFromBeach)
                 {
                     SpeakerHuman();
@@ -466,7 +473,7 @@ public class InteractionSquare : MonoBehaviour
             else
             {
                 SpeakerHuman();
-                dialogText.text = "But I don't have a towel to lay on.";
+                dialogText.text = "I didn't bring a towel to lay on.";
                 FindObjectOfType<GameLogic>().needsTowel = true;
                 yield return new WaitForSeconds(1.5f);
             }

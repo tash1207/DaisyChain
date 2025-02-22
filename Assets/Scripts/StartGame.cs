@@ -11,4 +11,9 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene(introSceneIndex);
     }
+
+    public void EndGame()
+    {
+        Application.Quit();
+    }
 }
