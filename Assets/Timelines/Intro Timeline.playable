@@ -1650,10 +1650,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Pen_v4_wav
   - m_Version: 1
-    m_Start: 0
-    m_ClipIn: 0.48333333333333334
+    m_Start: 0.35
+    m_ClipIn: 0.8333333333333333
     m_Asset: {fileID: -7941986787067305444}
-    m_Duration: 9.155850340136055
+    m_Duration: 8.805850340136056
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2339592643559551825}
     m_EaseInDuration: 0
