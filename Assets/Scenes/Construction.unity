@@ -3413,9 +3413,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 774325093}
     - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
+      propertyPath: moveableObject
+      value: 
+      objectReference: {fileID: 425333368}
+    - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
       propertyPath: interactionType
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
+      propertyPath: moveableObjectSpriteMoved
+      value: 
+      objectReference: {fileID: -1351450402, guid: 7c4196a9d5f65ce4f8355e85bedb9017, type: 3}
+    - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
+      propertyPath: moveableObjectSpriteDefault
+      value: 
+      objectReference: {fileID: -605317435, guid: 7c4196a9d5f65ce4f8355e85bedb9017, type: 3}
     - target: {fileID: 611246423620513260, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
       propertyPath: m_SortingLayer
       value: 0

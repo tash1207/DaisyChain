@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 public class InteractionSquare : MonoBehaviour
 {
     [SerializeField] InteractionType interactionType;
-    [SerializeField] GameObject collectible;
     [SerializeField] GameObject dialogCanvas;
     [SerializeField] TMP_Text dialogText;
     [SerializeField] Image dialogImage;
@@ -18,6 +17,11 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] Sprite humanSprite;
     [SerializeField] Sprite neighborSprite;
     [SerializeField] Sprite workerSprite;
+
+    [SerializeField] GameObject collectible;
+    [SerializeField] GameObject moveableObject;
+    [SerializeField] Sprite moveableObjectSpriteDefault;
+    [SerializeField] Sprite moveableObjectSpriteMoved;
 
     bool hasInteracted = false;
     bool hasReachedEndGame = false;
@@ -90,7 +94,6 @@ public class InteractionSquare : MonoBehaviour
         if (hasInteracted) { return; }
         if (collision.tag == "Player")
         {
-            Debug.Log("OnTriggerEnter2D");
             if (interactionType == InteractionType.BinCompost)
             {
                 SpeakerDaisy();
@@ -329,6 +332,10 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Neighbor)
         {
+            if (moveableObject != null)
+            {
+                moveableObject.transform.Rotate(new Vector3(0, 180, 0));
+            }
             SpeakerNeighbor();
             dialogText.text = "Here you go!";
             FindObjectOfType<Health>().MaxWater();
@@ -342,6 +349,10 @@ public class InteractionSquare : MonoBehaviour
                 FindObjectOfType<Health>().IncreaseMood(25);
                 FindObjectOfType<GameLogic>().happinessFromNeighbor = true;
                 yield return new WaitForSeconds(1.5f);
+            }
+            if (moveableObject != null)
+            {
+                moveableObject.transform.Rotate(new Vector3(0, -180, 0));
             }
             ResumePlayerMovement();
             Destroy(gameObject);
@@ -365,6 +376,10 @@ public class InteractionSquare : MonoBehaviour
             }
             else
             {
+                if (moveableObject != null)
+                {
+                    moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
+                }
                 dialogText.text = "Here you go!";
                 FindObjectOfType<Health>().MaxSoil();
                 yield return new WaitForSeconds(2f);
@@ -377,6 +392,10 @@ public class InteractionSquare : MonoBehaviour
                     FindObjectOfType<Health>().IncreaseMood(25);
                     FindObjectOfType<GameLogic>().happinessFromConstruction = true;
                     yield return new WaitForSeconds(1f);
+                }
+                if (moveableObject != null)
+                {
+                    moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
                 }
                 ResumePlayerMovement();
                 Destroy(gameObject);
