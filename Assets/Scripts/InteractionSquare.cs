@@ -464,12 +464,13 @@ public class InteractionSquare : MonoBehaviour
             {
                 if (moveableObject != null)
                 {
-                    // Hide daisy (and collar) and human and show sunbathing sprites.
+                    // Hide daisy (and collar) and human (and leash) and show sunbathing sprites.
                     GameObject daisy = FindObjectOfType<PlayerMovement>().gameObject;
                     GameObject human = FindObjectOfType<HumanMovement>().gameObject;
                     daisy.GetComponent<SpriteRenderer>().enabled = false;
                     human.GetComponent<SpriteRenderer>().enabled = false;
                     daisy.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                    human.transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
                     moveableObject.SetActive(true);
                 }
                 SpeakerDaisy();
@@ -495,6 +496,7 @@ public class InteractionSquare : MonoBehaviour
                     daisy.GetComponent<SpriteRenderer>().enabled = true;
                     human.GetComponent<SpriteRenderer>().enabled = true;
                     daisy.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                    human.transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
                     moveableObject.SetActive(false);
                 }
                 Destroy(gameObject);
