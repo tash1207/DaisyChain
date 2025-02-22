@@ -472,6 +472,7 @@ public class InteractionSquare : MonoBehaviour
                     daisy.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
                     human.transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
                     moveableObject.SetActive(true);
+                    GetComponent<SpriteRenderer>().enabled = false;
                 }
                 SpeakerDaisy();
                 dialogText.text = "Mmm that's the stuff!";
@@ -483,7 +484,7 @@ public class InteractionSquare : MonoBehaviour
                     SpeakerHuman();
                     dialogText.text = "This Vitamin D is making me feel a little better too.";
                     FindObjectOfType<Health>().ShowMood();
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(2f);
                     FindObjectOfType<Health>().IncreaseMood(25);
                     FindObjectOfType<GameLogic>().happinessFromBeach = true;
                     yield return new WaitForSeconds(1f);

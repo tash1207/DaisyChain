@@ -75,8 +75,8 @@ LineRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -1
   m_Positions:
-  - {x: -5, y: 2.75, z: 0}
-  - {x: -5, y: 2, z: 1}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -291,7 +291,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 5.8309517
+  m_Distance: 9.065506
   m_DampingRatio: 0
   m_Frequency: 100
 --- !u!114 &7402391588691536200
