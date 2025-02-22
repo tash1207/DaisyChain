@@ -507,7 +507,7 @@ public class InteractionSquare : MonoBehaviour
                 dialogText.text = "I need to be alone again.";
                 FindObjectOfType<Health>().ShowMood();
                 yield return new WaitForSeconds(2f);
-                FindObjectOfType<Health>().DecreaseMood(50);
+                FindObjectOfType<Health>().MinMood();
                 yield return new WaitForSeconds(2f);
                 SceneManager.LoadScene(suboptimalEndingSceneIndex);
             }

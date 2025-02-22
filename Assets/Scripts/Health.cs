@@ -49,12 +49,14 @@ public class Health : MonoBehaviour
     {
         airHealth -= value;
         airSlider.value = airHealth;
+        airHealth = Mathf.Clamp(airHealth, 0, maxValue);
     }
 
     public void IncreaseAir(float value)
     {
         airHealth += value;
         airSlider.value = airHealth;
+        airHealth = Mathf.Clamp(airHealth, 0, maxValue);
     }
 
     public void DecreaseSoil(int value)
@@ -70,6 +72,7 @@ public class Health : MonoBehaviour
         // TODO: Set a min of 0.
         soilHealth -= value;
         soilSlider.value = soilHealth;
+        soilHealth = Mathf.Clamp(soilHealth, 0, maxValue);
         StartCoroutine(ChangeBackToWhite(soilText));
     }
 
@@ -85,6 +88,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         soilHealth += value;
         soilSlider.value = soilHealth;
+        soilHealth = Mathf.Clamp(soilHealth, 0, maxValue);
         StartCoroutine(ChangeBackToWhite(soilText));
     }
 
@@ -92,6 +96,7 @@ public class Health : MonoBehaviour
     {
         sunHealth -= value;
         sunSlider.value = sunHealth;
+        sunHealth = Mathf.Clamp(sunHealth, 0, maxValue);
     }
 
     public void IncreaseSun(int value)
@@ -106,6 +111,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         sunHealth += value;
         sunSlider.value = sunHealth;
+        sunHealth = Mathf.Clamp(sunHealth, 0, maxValue);
         StartCoroutine(ChangeBackToWhite(sunText));
     }
 
@@ -121,6 +127,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         waterHealth -= value;
         waterSlider.value = waterHealth;
+        waterHealth = Mathf.Clamp(waterHealth, 0, maxValue);
         StartCoroutine(ChangeBackToWhite(waterText));
     }
 
@@ -136,6 +143,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         waterHealth += value;
         waterSlider.value = waterHealth;
+        waterHealth = Mathf.Clamp(waterHealth, 0, maxValue);
         StartCoroutine(ChangeBackToWhite(waterText));
     }
 
@@ -170,12 +178,21 @@ public class Health : MonoBehaviour
         moodMeter.SetActive(true);
         moodHealth -= value;
         moodSlider.value = moodHealth;
+        moodHealth = Mathf.Clamp(moodHealth, 0, maxValue);
     }
 
     public void IncreaseMood(int value)
     {
         moodMeter.SetActive(true);
         moodHealth += value;
+        moodSlider.value = moodHealth;
+        moodHealth = Mathf.Clamp(moodHealth, 0, maxValue);
+    }
+
+    public void MinMood()
+    {
+        moodMeter.SetActive(true);
+        moodHealth = 0;
         moodSlider.value = moodHealth;
     }
 
