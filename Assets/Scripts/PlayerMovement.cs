@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb2d;
     Animator animator;
+    Animator collarAnimator;
 
     Vector2 lookDirection = new Vector2(0, -1);
     float moveSpeed = 3f;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collarAnimator = gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Update()
@@ -47,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("LookX", lookDirection.x);
         animator.SetFloat("LookY", lookDirection.y);
+        collarAnimator.SetFloat("LookX", lookDirection.x);
+        collarAnimator.SetFloat("LookY", lookDirection.y);
     }
 
     public void PausePlayerMovement()
