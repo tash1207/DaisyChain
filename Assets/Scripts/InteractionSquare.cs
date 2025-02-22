@@ -63,6 +63,7 @@ public class InteractionSquare : MonoBehaviour
         Lamp,
         GetTowel,
         DaisyJoke,
+        OceanWater,
     }
 
     void Start()
@@ -209,8 +210,8 @@ public class InteractionSquare : MonoBehaviour
             else if (interactionType == InteractionType.ConstructionWater)
             {
                 SpeakerDaisy();
-                dialogText.text = "*spit take*\nPretty sure that was sewer water :(";
-                FindObjectOfType<Health>().DecreaseWater(20);
+                dialogText.text = "Fresh water! Yay!";
+                FindObjectOfType<Health>().IncreaseWater(35);
                 PausePlayerMovement();
                 StartCoroutine(OneTimeUse());
             }
@@ -286,6 +287,14 @@ public class InteractionSquare : MonoBehaviour
                 dialogText.text = "Hey Casey, what do you call a flower that runs on electricity?";
                 PausePlayerMovement();
                 StartCoroutine(NextDialog());
+            }
+            else if (interactionType == InteractionType.OceanWater)
+            {
+                SpeakerDaisy();
+                dialogText.text = "Salt water! Nooo!";
+                FindObjectOfType<Health>().DecreaseWater(25);
+                PausePlayerMovement();
+                StartCoroutine(OneTimeUse());
             }
 
             dialogCanvas.SetActive(true);
