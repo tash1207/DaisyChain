@@ -7,6 +7,8 @@ public class SceneStart : MonoBehaviour
     [SerializeField] GameObject daisy;
     [SerializeField] GameObject human;
 
+    [SerializeField] GameObject towel;
+
     Vector2 constructionTopLeftDaisy = new Vector2(-4.3f, 4f);
     Vector2 constructionTopLeftHuman = new Vector2(-3.3f, 4f);
 
@@ -34,6 +36,17 @@ public class SceneStart : MonoBehaviour
         foreach (GameSession gameSession in FindObjectsOfType<GameSession>())
         {
             gameSession.SetSceneSettings();
+        }
+
+        if (towel != null)
+        {
+            foreach (GameLogic gameLogic in FindObjectsOfType<GameLogic>())
+            {
+                if (gameLogic.hasTowel)
+                {
+                    towel.SetActive(true);
+                }
+            }
         }
     }
 

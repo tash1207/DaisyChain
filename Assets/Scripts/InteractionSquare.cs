@@ -24,6 +24,7 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] Sprite moveableObjectSpriteMoved;
 
     bool hasInteracted = false;
+    bool showingGetTowelSquare = false;
     bool hasReachedEndGame = false;
 
     int outsideHouseSceneIndex = 3;
@@ -58,6 +59,7 @@ public class InteractionSquare : MonoBehaviour
         Sink,
         Bookcase,
         Lamp,
+        GetTowel,
     }
 
     void Start()
@@ -86,6 +88,14 @@ public class InteractionSquare : MonoBehaviour
                 GetComponent<SpriteRenderer>().enabled = true;
                 GetComponent<BoxCollider2D>().enabled = true;
             }
+        }
+        else if (interactionType == InteractionType.GetTowel && !showingGetTowelSquare &&
+            FindObjectOfType<GameLogic>().needsTowel &&
+            !FindObjectOfType<GameLogic>().hasTowel)
+        {
+            showingGetTowelSquare = true;
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<BoxCollider2D>().enabled = true;
         }
     }
 
@@ -238,6 +248,13 @@ public class InteractionSquare : MonoBehaviour
             {
                 SpeakerDaisy();
                 dialogText.text = "This lamp ain't cutting it. I need real sunlight.";
+            }
+            else if (interactionType == InteractionType.GetTowel)
+            {
+                SpeakerHuman();
+                dialogText.text = "I'll just grab a towel while we're here.";
+                PausePlayerMovement();
+                StartCoroutine(NextDialog());
             }
 
             dialogCanvas.SetActive(true);
@@ -403,23 +420,33 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.Sunbathe)
         {
-            SpeakerDaisy();
-            dialogText.text = "Mmm that's the stuff!";
-            FindObjectOfType<Health>().MaxSun();
+            if (FindObjectOfType<GameLogic>().hasTowel)
+            {
+                SpeakerDaisy();
+                dialogText.text = "Mmm that's the stuff!";
+                FindObjectOfType<Health>().MaxSun();
 
-            yield return new WaitForSeconds(2f);
-            if (!FindObjectOfType<GameLogic>().happinessFromBeach)
+                yield return new WaitForSeconds(2f);
+                if (!FindObjectOfType<GameLogic>().happinessFromBeach)
+                {
+                    SpeakerHuman();
+                    dialogText.text = "That Vitamin D made me feel a little better too.";
+                    FindObjectOfType<Health>().ShowMood();
+                    yield return new WaitForSeconds(1.5f);
+                    FindObjectOfType<Health>().IncreaseMood(25);
+                    FindObjectOfType<GameLogic>().happinessFromBeach = true;
+                    yield return new WaitForSeconds(1f);
+                    Destroy(gameObject);
+                }
+            }
+            else
             {
                 SpeakerHuman();
-                dialogText.text = "That Vitamin D made me feel a little better too :)";
-                FindObjectOfType<Health>().ShowMood();
+                dialogText.text = "But I don't have a towel to lay on.";
+                FindObjectOfType<GameLogic>().needsTowel = true;
                 yield return new WaitForSeconds(1.5f);
-                FindObjectOfType<Health>().IncreaseMood(25);
-                FindObjectOfType<GameLogic>().happinessFromBeach = true;
-                yield return new WaitForSeconds(1f);
             }
             ResumePlayerMovement();
-            Destroy(gameObject);
         }
         else if (interactionType == InteractionType.EndGame)
         {
@@ -439,6 +466,23 @@ public class InteractionSquare : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 SceneManager.LoadScene(outroHappySceneIndex);
             }
+        }
+        else if (interactionType == InteractionType.GetTowel)
+        {
+            if (moveableObject != null)
+            {
+                moveableObject.SetActive(false);
+            }
+            SpeakerDaisy();
+            dialogText.text = "Grab one for me too!";
+            yield return new WaitForSeconds(2f);
+            if (moveableObject != null)
+            {
+                moveableObject.SetActive(true);
+            }
+            Destroy(gameObject);
+            FindObjectOfType<GameLogic>().hasTowel = true;
+            ResumePlayerMovement();
         }
     }
 
