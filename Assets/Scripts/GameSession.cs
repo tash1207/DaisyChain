@@ -75,12 +75,14 @@ public class GameSession : MonoBehaviour
             case 6:
                 currentSceneSetting = SceneSetting.Beach;
                 break;
+            case 8:
+                ResetGameSession();
+                break;
         }
     }
 
     void ResetGameSession()
     {
-        SceneManager.LoadScene(0);
         Destroy(gameObject);
     }
 }
