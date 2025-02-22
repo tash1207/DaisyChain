@@ -26,6 +26,7 @@ public class InteractionSquare : MonoBehaviour
     int neighborYardSceneIndex = 3;
     int constructionSceneIndex = 4;
     int beachSceneIndex = 5;
+    int outroHappySceneIndex = 6;
 
     public enum InteractionType
     {
@@ -416,8 +417,8 @@ public class InteractionSquare : MonoBehaviour
                 FindObjectOfType<Health>().ShowMood();
                 yield return new WaitForSeconds(2.5f);
                 FindObjectOfType<Health>().IncreaseMood(25);
-                ResumePlayerMovement();
-                // TODO: Load happy end cutscene.
+                yield return new WaitForSeconds(1.5f);
+                SceneManager.LoadScene(outroHappySceneIndex);
             }
         }
     }
