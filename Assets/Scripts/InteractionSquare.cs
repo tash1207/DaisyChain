@@ -32,6 +32,7 @@ public class InteractionSquare : MonoBehaviour
     int constructionSceneIndex = 5;
     int beachSceneIndex = 6;
     int outroHappySceneIndex = 7;
+    int suboptimalEndingSceneIndex = 9;
 
     public enum InteractionType
     {
@@ -485,8 +486,11 @@ public class InteractionSquare : MonoBehaviour
             if (!FindObjectOfType<Health>().HasMaxedHumanMeters())
             {
                 dialogText.text = "I need to be alone again.";
-                ResumePlayerMovement();
-                // TODO: Trigger suboptimal game ending.
+                FindObjectOfType<Health>().ShowMood();
+                yield return new WaitForSeconds(2f);
+                FindObjectOfType<Health>().DecreaseMood(50);
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene(suboptimalEndingSceneIndex);
             }
             else
             {

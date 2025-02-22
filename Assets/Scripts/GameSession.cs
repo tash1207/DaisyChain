@@ -76,6 +76,7 @@ public class GameSession : MonoBehaviour
                 currentSceneSetting = SceneSetting.Beach;
                 break;
             case 8:
+            case 9:
                 ResetGameSession();
                 break;
         }
