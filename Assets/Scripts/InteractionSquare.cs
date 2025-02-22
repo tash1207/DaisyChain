@@ -139,6 +139,10 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Human)
             {
+                if (moveableObject != null)
+                {
+                    moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
+                }
                 SpeakerHuman();
                 dialogText.text = "Aah! You can walk?";
                 if (FindObjectOfType<Collar>().IsWearingCollar())
@@ -513,6 +517,10 @@ public class InteractionSquare : MonoBehaviour
             if (dialogCanvas != null)
             {
                 dialogCanvas.SetActive(false);
+            }
+            if (moveableObject != null && moveableObjectSpriteDefault != null)
+            {
+                moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
             }
         }
     }
