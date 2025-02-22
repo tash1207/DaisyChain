@@ -8,6 +8,8 @@ public class LoadScene : MonoBehaviour
 {
     public PlayableDirector playableDirector;
 
+    int insideHouseSceneIndex = 2;
+
     void Start()
     {
         playableDirector.stopped += OnPlayableDirectorStopped;
@@ -17,7 +19,7 @@ public class LoadScene : MonoBehaviour
     {
         if (playableDirector == director)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(insideHouseSceneIndex);
         }
     }
 }

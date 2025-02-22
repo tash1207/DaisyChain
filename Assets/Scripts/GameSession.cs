@@ -35,7 +35,7 @@ public class GameSession : MonoBehaviour
         previousSceneSetting = currentSceneSetting;
         switch(SceneManager.GetActiveScene().buildIndex)
         {
-            case 2:
+            case 3:
                 currentSceneSetting = SceneSetting.OutsideHouse;
                 if (previousSceneSetting == SceneSetting.Beach)
                 {
@@ -50,7 +50,7 @@ public class GameSession : MonoBehaviour
                     FindObjectOfType<SceneStart>().NeighborYardToOutsideHouse();
                 }
                 break;
-            case 3:
+            case 4:
                 currentSceneSetting = SceneSetting.NeighborYard;
                 if (previousSceneSetting == SceneSetting.Construction)
                 {
@@ -61,7 +61,7 @@ public class GameSession : MonoBehaviour
                     FindObjectOfType<SceneStart>().OutsideHouseToNeighborYard();
                 }
                 break;
-            case 4:
+            case 5:
                 currentSceneSetting = SceneSetting.Construction;
                 if (previousSceneSetting == SceneSetting.NeighborYard)
                 {
@@ -72,7 +72,7 @@ public class GameSession : MonoBehaviour
                     FindObjectOfType<SceneStart>().OutsideHouseToConstruction();
                 }
                 break;
-            case 5:
+            case 6:
                 currentSceneSetting = SceneSetting.Beach;
                 break;
         }

@@ -22,11 +22,11 @@ public class InteractionSquare : MonoBehaviour
     bool hasInteracted = false;
     bool hasReachedEndGame = false;
 
-    int outsideHouseSceneIndex = 2;
-    int neighborYardSceneIndex = 3;
-    int constructionSceneIndex = 4;
-    int beachSceneIndex = 5;
-    int outroHappySceneIndex = 6;
+    int outsideHouseSceneIndex = 3;
+    int neighborYardSceneIndex = 4;
+    int constructionSceneIndex = 5;
+    int beachSceneIndex = 6;
+    int outroHappySceneIndex = 7;
 
     public enum InteractionType
     {
@@ -325,7 +325,7 @@ public class InteractionSquare : MonoBehaviour
             ResumePlayerMovement();
             yield return new WaitForSeconds(1f);
             // TODO: Fade to black?
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(outsideHouseSceneIndex);
         }
         else if (interactionType == InteractionType.Neighbor)
         {
