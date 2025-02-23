@@ -154,14 +154,16 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Human)
             {
-                if (moveableObject != null)
-                {
-                    moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
-                }
                 SpeakerHuman();
-                dialogText.text = "Aah! You can walk?";
+                dialogText.text = "...";
                 if (FindObjectOfType<Collar>().IsWearingCollar())
                 {
+                    if (moveableObject != null)
+                    {
+                        moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
+                    }
+                    SpeakerHuman();
+                    dialogText.text = "Aah! You can walk?";
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
                 }
@@ -255,7 +257,7 @@ public class InteractionSquare : MonoBehaviour
                 else
                 {
                     SpeakerHuman();
-                    dialogText.text = "It's been an eventful day, Daisy.";
+                    dialogText.text = "It's been an exciting day, Daisy.";
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
                 }
