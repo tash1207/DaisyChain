@@ -546,10 +546,11 @@ public class InteractionSquare : MonoBehaviour
             {
                 moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
             }
+            SoundFXManager.instance.PlaySoundFXClip(audioClip, 0.8f);
             SpeakerDaisy();
             dialogText.text = "Grab one for me too!";
             yield return new WaitForSeconds(2f);
-            SoundFXManager.instance.PlaySoundFXClipXTimes(audioClip, 0.8f, 2);
+            SoundFXManager.instance.PlaySoundFXClip(audioClip, 0.8f);
             // Close gate and show human.
             if (moveableObject != null)
             {
