@@ -120,18 +120,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad5d9aa631ef8444bad08ab71e641e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moodMeter: {fileID: 0}
   airSlider: {fileID: 3459117160117083942}
   soilSlider: {fileID: 7416388203273108399}
   sunSlider: {fileID: 9109928401925462420}
   waterSlider: {fileID: 5180516273987210166}
+  moodSlider: {fileID: 0}
   airText: {fileID: 0}
   soilText: {fileID: 0}
   sunText: {fileID: 0}
   waterText: {fileID: 0}
-  maxedAir: 0
-  maxedSoil: 0
-  maxedSun: 0
-  maxedWater: 0
+  moodText: {fileID: 0}
+  badClip: {fileID: 8300000, guid: 5bf94ac021257654e8900cec637c3a42, type: 3}
+  goodClip: {fileID: 8300000, guid: bd1a0d03fab5faf419d6e5a75a855913, type: 3}
 --- !u!1 &8146226348884034594
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +195,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foundWaterValveKey: 0
   waterTurnedOn: 0
+  needsTowel: 0
+  hasTowel: 0
+  happinessFromNeighbor: 0
+  happinessFromConstruction: 0
+  happinessFromBeach: 0
 --- !u!1 &8801025064657191189
 GameObject:
   m_ObjectHideFlags: 0

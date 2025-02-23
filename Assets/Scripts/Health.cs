@@ -20,6 +20,12 @@ public class Health : MonoBehaviour
     [SerializeField] TMP_Text waterText;
     [SerializeField] TMP_Text moodText;
 
+    [SerializeField] AudioClip badClip;
+    [SerializeField] AudioClip goodClip;
+
+    float badClipVolume = 0.8f;
+    float goodClipVolume = 0.5f;
+
     float airHealth = 15;
     int soilHealth = 30;
     int sunHealth = 40;
@@ -66,10 +72,10 @@ public class Health : MonoBehaviour
 
     IEnumerator DecreaseSoilDelay(int value)
     {
-        // TODO: Play negative interaction sound.
         yield return new WaitForSeconds(1f);
         soilText.color = Color.red;
         yield return new WaitForSeconds(0.75f);
+        SoundFXManager.instance.PlaySoundFXClip(badClip, badClipVolume);
         soilHealth -= value;
         soilSlider.value = soilHealth;
         soilHealth = Mathf.Clamp(soilHealth, 0, maxValue);
@@ -83,10 +89,10 @@ public class Health : MonoBehaviour
 
     IEnumerator IncreaseSoilDelay(int value)
     {
-        // TODO: Play positive interaction sound.
         yield return new WaitForSeconds(1f);
         soilText.color = Color.green;
         yield return new WaitForSeconds(0.75f);
+        SoundFXManager.instance.PlaySoundFXClip(goodClip, goodClipVolume);
         soilHealth += value;
         soilSlider.value = soilHealth;
         soilHealth = Mathf.Clamp(soilHealth, 0, maxValue);
@@ -95,6 +101,7 @@ public class Health : MonoBehaviour
 
     public void DecreaseSun(int value)
     {
+        SoundFXManager.instance.PlaySoundFXClip(badClip, badClipVolume);
         sunHealth -= value;
         sunSlider.value = sunHealth;
         sunHealth = Mathf.Clamp(sunHealth, 0, maxValue);
@@ -110,6 +117,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1f);
         sunText.color = Color.green;
         yield return new WaitForSeconds(0.75f);
+        SoundFXManager.instance.PlaySoundFXClip(goodClip, goodClipVolume);
         sunHealth += value;
         sunSlider.value = sunHealth;
         sunHealth = Mathf.Clamp(sunHealth, 0, maxValue);
@@ -126,6 +134,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1f);
         waterText.color = Color.red;
         yield return new WaitForSeconds(0.75f);
+        SoundFXManager.instance.PlaySoundFXClip(badClip, badClipVolume);
         waterHealth -= value;
         waterSlider.value = waterHealth;
         waterHealth = Mathf.Clamp(waterHealth, 0, maxValue);
@@ -142,6 +151,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1f);
         waterText.color = Color.green;
         yield return new WaitForSeconds(0.75f);
+        SoundFXManager.instance.PlaySoundFXClip(goodClip, goodClipVolume);
         waterHealth += value;
         waterSlider.value = waterHealth;
         waterHealth = Mathf.Clamp(waterHealth, 0, maxValue);
@@ -176,6 +186,7 @@ public class Health : MonoBehaviour
 
     public void DecreaseMood(int value)
     {
+        SoundFXManager.instance.PlaySoundFXClip(badClip, badClipVolume);
         moodMeter.SetActive(true);
         moodHealth -= value;
         moodSlider.value = moodHealth;
