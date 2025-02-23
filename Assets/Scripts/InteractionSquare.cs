@@ -549,6 +549,7 @@ public class InteractionSquare : MonoBehaviour
             SpeakerDaisy();
             dialogText.text = "Grab one for me too!";
             yield return new WaitForSeconds(2f);
+            SoundFXManager.instance.PlaySoundFXClipXTimes(audioClip, 0.8f, 2);
             // Close gate and show human.
             if (moveableObject != null)
             {
