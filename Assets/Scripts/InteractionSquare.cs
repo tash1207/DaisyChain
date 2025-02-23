@@ -154,8 +154,6 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Human)
             {
-                SpeakerHuman();
-                dialogText.text = "...";
                 if (FindObjectOfType<Collar>().IsWearingCollar())
                 {
                     if (moveableObject != null)
@@ -166,6 +164,12 @@ public class InteractionSquare : MonoBehaviour
                     dialogText.text = "Aah! You can walk?";
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
+                }
+                else
+                {
+                    SoundFXManager.instance.PlaySoundFXClipXTimesWithModulation(audioClip, 1f, 3, 0.1f);
+                    SpeakerHuman();
+                    dialogText.text = "...";
                 }
             }
             else if (interactionType == InteractionType.Plant)

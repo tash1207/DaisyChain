@@ -5288,7 +5288,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2264879893130143780, guid: daebc1fd9a6930a43aac86b88138cc4e, type: 3}
       propertyPath: m_Color.a
-      value: 0.6156863
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 3213300376429273612, guid: daebc1fd9a6930a43aac86b88138cc4e, type: 3}
       propertyPath: m_Pivot.x
@@ -6898,6 +6898,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1576050198}
     m_Modifications:
     - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 245965889d0a183438ef3478b27122c0, type: 3}
+    - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
       propertyPath: dialogText
       value: 
       objectReference: {fileID: 1239131957}
@@ -6917,6 +6921,10 @@ PrefabInstance:
       propertyPath: interactionType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
+      propertyPath: audioClipSecondary
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d54653003bc3524ab6b64cac060bd52, type: 3}
     - target: {fileID: 437463598644915312, guid: 43d7e1ed621594243938d7650e7b9b51, type: 3}
       propertyPath: moveableObjectSpriteMoved
       value: 

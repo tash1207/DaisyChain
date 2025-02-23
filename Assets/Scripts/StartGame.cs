@@ -9,11 +9,17 @@ public class StartGame : MonoBehaviour
 
     public void BeginGame()
     {
-        SceneManager.LoadScene(introSceneIndex);
+        StartCoroutine(LoadIntroScene());
     }
 
     public void EndGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadIntroScene()
+    {
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.LoadScene(introSceneIndex);
     }
 }
