@@ -66,10 +66,10 @@ public class Health : MonoBehaviour
 
     IEnumerator DecreaseSoilDelay(int value)
     {
+        // TODO: Play negative interaction sound.
         yield return new WaitForSeconds(1f);
         soilText.color = Color.red;
         yield return new WaitForSeconds(0.75f);
-        // TODO: Set a min of 0.
         soilHealth -= value;
         soilSlider.value = soilHealth;
         soilHealth = Mathf.Clamp(soilHealth, 0, maxValue);
@@ -83,6 +83,7 @@ public class Health : MonoBehaviour
 
     IEnumerator IncreaseSoilDelay(int value)
     {
+        // TODO: Play positive interaction sound.
         yield return new WaitForSeconds(1f);
         soilText.color = Color.green;
         yield return new WaitForSeconds(0.75f);

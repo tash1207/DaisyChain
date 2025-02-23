@@ -79,6 +79,8 @@ public class GameSession : MonoBehaviour
                 FindObjectOfType<AmbienceSounds>().DestroySounds();
                 break;
             case 8:
+                ResetGameSession();
+                break;
             case 9:
                 FindObjectOfType<AmbienceSounds>().DestroySounds();
                 ResetGameSession();

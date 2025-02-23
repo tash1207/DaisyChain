@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6462427062787122085}
   - component: {fileID: 3417756978521976927}
   - component: {fileID: 4858405151275674794}
+  - component: {fileID: 581374671738268584}
   m_Layer: 0
   m_Name: Daisy
   m_TagString: Player
@@ -230,6 +231,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collar: {fileID: 0}
+--- !u!81 &581374671738268584
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212862261875053745}
+  m_Enabled: 1
 --- !u!1 &7107777710295626242
 GameObject:
   m_ObjectHideFlags: 0

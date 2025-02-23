@@ -9504,6 +9504,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 581374671738268584, guid: 72d4f53c8adf32946a53778b13b613f2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2212862261875053745, guid: 72d4f53c8adf32946a53778b13b613f2, type: 3}
       propertyPath: m_Name
       value: Daisy
