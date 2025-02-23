@@ -388,10 +388,6 @@ public class InteractionSquare : MonoBehaviour
             SpeakerHuman();
             dialogText.text = "Well, I guess we can go for a walk.";
             yield return new WaitForSeconds(2.5f);
-
-            ResumePlayerMovement();
-            yield return new WaitForSeconds(1f);
-            // TODO: Fade to black?
             SceneManager.LoadScene(outsideHouseSceneIndex);
         }
         else if (interactionType == InteractionType.Neighbor)
@@ -542,17 +538,25 @@ public class InteractionSquare : MonoBehaviour
         }
         else if (interactionType == InteractionType.GetTowel)
         {
+            // Hide human and open gate.
+            GameObject human = FindObjectOfType<HumanMovement>().gameObject;
+            human.GetComponent<SpriteRenderer>().enabled = false;
+            human.transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
             if (moveableObject != null)
             {
-                moveableObject.SetActive(false);
+                moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
             }
             SpeakerDaisy();
             dialogText.text = "Grab one for me too!";
             yield return new WaitForSeconds(2f);
+            // Close gate and show human.
             if (moveableObject != null)
             {
-                moveableObject.SetActive(true);
+                moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
             }
+            human.GetComponent<SpriteRenderer>().enabled = true;
+            human.transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;
+
             Destroy(gameObject);
             FindObjectOfType<GameLogic>().hasTowel = true;
             ResumePlayerMovement();
@@ -566,9 +570,11 @@ public class InteractionSquare : MonoBehaviour
             SpeakerHuman();
             dialogText.text = "Hehe I wasn't expecting that.";
             FindObjectOfType<Health>().ShowMood();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
             FindObjectOfType<Health>().IncreaseMood(25);
             yield return new WaitForSeconds(1.5f);
+            dialogText.text = "Are you ready to head back inside?";
+            yield return new WaitForSeconds(2f);
             Destroy(gameObject);
             ResumePlayerMovement();
         }
