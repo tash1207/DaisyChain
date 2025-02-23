@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
     [SerializeField] AudioClip goodClip;
 
     float badClipVolume = 0.8f;
-    float goodClipVolume = 0.5f;
+    float goodClipVolume = 0.4f;
 
     float airHealth = 15;
     int soilHealth = 30;

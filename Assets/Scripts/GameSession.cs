@@ -76,16 +76,24 @@ public class GameSession : MonoBehaviour
                 currentSceneSetting = SceneSetting.Beach;
                 break;
             case 7:
-                FindObjectOfType<AmbienceSounds>().DestroySounds();
+                RemoveAllGameBackgroundMusic();
                 ResetGameSession();
                 break;
             case 8:
                 ResetGameSession();
                 break;
             case 9:
-                FindObjectOfType<AmbienceSounds>().DestroySounds();
+                RemoveAllGameBackgroundMusic();
                 ResetGameSession();
                 break;
+        }
+    }
+
+    void RemoveAllGameBackgroundMusic()
+    {
+        foreach (AmbienceSounds ambienceSounds in FindObjectsOfType<AmbienceSounds>())
+        {
+            ambienceSounds.DestroySounds();
         }
     }
 
