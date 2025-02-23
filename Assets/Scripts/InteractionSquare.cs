@@ -22,6 +22,7 @@ public class InteractionSquare : MonoBehaviour
     [SerializeField] GameObject moveableObject;
     [SerializeField] Sprite moveableObjectSpriteDefault;
     [SerializeField] Sprite moveableObjectSpriteMoved;
+    [SerializeField] AudioClip audioClip;
 
     bool hasInteracted = false;
     bool showingGetTowelSquare = false;
@@ -363,12 +364,12 @@ public class InteractionSquare : MonoBehaviour
 
         if (interactionType == InteractionType.Collar)
         {
+            SoundFXManager.instance.PlaySoundFXClip(audioClip, 0.8f);
             FindObjectOfType<Collar>().WearCollar();
         }
         else if (interactionType == InteractionType.MissingKey)
         {
-            // TODO: Maybe wear the key. Or show it in inventory somehow.
-            //FindObjectOfType<Collar>().WearCollar();
+            SoundFXManager.instance.PlaySoundFXClip(audioClip, 0.8f);
         }
         ResumePlayerMovement();
     }
