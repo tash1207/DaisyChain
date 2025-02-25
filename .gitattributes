@@ -1,1 +1,13 @@
+Assets/Audio/Ambience/Ambient[[:space:]]Birds.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/Ambient[[:space:]]Wind.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/Beach[[:space:]]Loop.wav filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/FIREBrst_InsJ_Flamethrower_Short_01-01_WET.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/Ambient[[:space:]]Birds.wav filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/Beach[[:space:]]Loop.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/FIREBrst_InsJ_Flamethrower_Short_01-01_WET.wav filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/WATRFlow_InsJ_Stream_Water_01_LOOP.wav filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/WATRFlow_InsJ_Stream_Water_01_LOOP.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/WHSH_InsJ_Whooshing_Bamboo_01-01.wav filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/WHSH_InsJ_Whooshing_Bamboo_01-01.wav.meta filter=lfs diff=lfs merge=lfs -text
+Assets/Audio/Ambience/Ambient[[:space:]]Wind.wav filter=lfs diff=lfs merge=lfs -text
 *.wav filter=lfs diff=lfs merge=lfs -text
