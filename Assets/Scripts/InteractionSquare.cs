@@ -28,6 +28,7 @@ public class InteractionSquare : MonoBehaviour
     bool showingGetTowelSquare = false;
     bool hasEnabledJoke = false;
     bool hasReachedEndGame = false;
+    bool midInteraction = false;
 
     int outsideHouseSceneIndex = 3;
     int neighborYardSceneIndex = 4;
@@ -94,7 +95,8 @@ public class InteractionSquare : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = true;
             }
         }
-        else if (interactionType == InteractionType.DaisyJoke && !hasEnabledJoke)
+        else if (interactionType == InteractionType.DaisyJoke && !hasEnabledJoke &&
+                !FindObjectOfType<GameLogic>().happinessFromJoke)
             {
                 if (FindObjectOfType<Health>().HasMaxedPlantMeters() &&
                     FindObjectOfType<Health>().HasHappyHumanMeters())
@@ -156,6 +158,7 @@ public class InteractionSquare : MonoBehaviour
             {
                 if (FindObjectOfType<Collar>().IsWearingCollar())
                 {
+                    midInteraction = true;
                     if (moveableObject != null)
                     {
                         moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteMoved;
@@ -187,6 +190,7 @@ public class InteractionSquare : MonoBehaviour
                 }
                 else
                 {
+                    midInteraction = true;
                     dialogText.text = "I'm so happy that my hose is working again. Would you like some water?";
                     PausePlayerMovement();
                     StartCoroutine(NextDialog());
@@ -194,6 +198,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Worker)
             {
+                midInteraction = true;
                 SpeakerWorker();
                 if (!FindObjectOfType<GameLogic>().foundWaterValveKey)
                 {
@@ -232,6 +237,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.Sunbathe)
             {
+                midInteraction = true;
                 SpeakerDaisy();
                 if (FindObjectOfType<GameLogic>().hasTowel)
                 {
@@ -253,6 +259,7 @@ public class InteractionSquare : MonoBehaviour
                 }
                 else if (!FindObjectOfType<Health>().HasMaxedHumanMeters())
                 {
+                    midInteraction = true;
                     SpeakerHuman();
                     dialogText.text = "You seem like you have everything you need. Let's go inside.";
                     PausePlayerMovement();
@@ -260,6 +267,7 @@ public class InteractionSquare : MonoBehaviour
                 }
                 else
                 {
+                    midInteraction = true;
                     SpeakerHuman();
                     dialogText.text = "It's been an exciting day, Daisy.";
                     PausePlayerMovement();
@@ -283,6 +291,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.GetTowel)
             {
+                midInteraction = true;
                 SpeakerHuman();
                 dialogText.text = "I'll just grab a towel while we're here.";
                 PausePlayerMovement();
@@ -290,6 +299,7 @@ public class InteractionSquare : MonoBehaviour
             }
             else if (interactionType == InteractionType.DaisyJoke)
             {
+                midInteraction = true;
                 SpeakerDaisy();
                 dialogText.text = "Hey Casey, what do you call a flower that runs on electricity?";
                 PausePlayerMovement();
@@ -414,6 +424,7 @@ public class InteractionSquare : MonoBehaviour
             {
                 moveableObject.transform.Rotate(new Vector3(0, -180, 0));
             }
+            EndInteraction();
             ResumePlayerMovement();
             Destroy(gameObject);
         }
@@ -424,6 +435,7 @@ public class InteractionSquare : MonoBehaviour
             {
                 dialogText.text = "I lost the key to the water shut off valve. The whole street doesn't have any water.";
                 yield return new WaitForSeconds(3f);
+                EndInteraction();
                 ResumePlayerMovement();
             }
             else if (!FindObjectOfType<GameLogic>().waterTurnedOn)
@@ -431,6 +443,7 @@ public class InteractionSquare : MonoBehaviour
                 FindObjectOfType<GameLogic>().waterTurnedOn = true;
                 dialogText.text = "Thank you so so much!";
                 yield return new WaitForSeconds(2f);
+                EndInteraction();
                 ResumePlayerMovement();
                 Destroy(gameObject);
             }
@@ -457,6 +470,7 @@ public class InteractionSquare : MonoBehaviour
                 {
                     moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
                 }
+                EndInteraction();
                 ResumePlayerMovement();
                 Destroy(gameObject);
             }
@@ -512,6 +526,7 @@ public class InteractionSquare : MonoBehaviour
                 FindObjectOfType<GameLogic>().needsTowel = true;
                 yield return new WaitForSeconds(1.5f);
             }
+            EndInteraction();
             ResumePlayerMovement();
         }
         else if (interactionType == InteractionType.EndGame)
@@ -562,6 +577,7 @@ public class InteractionSquare : MonoBehaviour
             Destroy(gameObject);
             FindObjectOfType<GameLogic>().hasTowel = true;
             ResumePlayerMovement();
+            EndInteraction();
         }
         else if (interactionType == InteractionType.DaisyJoke)
         {
@@ -574,26 +590,33 @@ public class InteractionSquare : MonoBehaviour
             FindObjectOfType<Health>().ShowMood();
             yield return new WaitForSeconds(1.5f);
             FindObjectOfType<Health>().IncreaseMood(25);
+            FindObjectOfType<GameLogic>().happinessFromJoke = true;
             yield return new WaitForSeconds(1.5f);
             dialogText.text = "Are you ready to head back inside?";
             yield return new WaitForSeconds(2f);
             Destroy(gameObject);
             ResumePlayerMovement();
+            EndInteraction();
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !midInteraction)
         {
-            if (dialogCanvas != null)
-            {
-                dialogCanvas.SetActive(false);
-            }
-            if (moveableObject != null && moveableObjectSpriteDefault != null)
-            {
-                moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
-            }
+            EndInteraction();
+        }
+    }
+
+    void EndInteraction()
+    {
+        if (dialogCanvas != null)
+        {
+            dialogCanvas.SetActive(false);
+        }
+        if (moveableObject != null && moveableObjectSpriteDefault != null)
+        {
+            moveableObject.GetComponent<SpriteRenderer>().sprite = moveableObjectSpriteDefault;
         }
     }
 

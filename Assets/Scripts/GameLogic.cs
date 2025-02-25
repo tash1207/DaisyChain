@@ -12,4 +12,5 @@ public class GameLogic : MonoBehaviour
     public bool happinessFromNeighbor = false;
     public bool happinessFromConstruction = false;
     public bool happinessFromBeach = false;
+    public bool happinessFromJoke = false;
 }
