@@ -11,6 +11,7 @@ public class HumanMovement : MonoBehaviour
     LineRenderer lineRenderer;
 
     Vector2 lookDirection = new Vector2(0, -1);
+    float minVelocity = 0.5f;
 
     void Start()
     {
@@ -22,13 +23,11 @@ public class HumanMovement : MonoBehaviour
 
     void Update()
     {
-        // TODO: Determine if connecting this to Daisy's X, Y, and movement is better.
-
-        bool playerHasHorizontalSpeed = Mathf.Abs(rb2d.velocity.x) > Mathf.Epsilon;
-        bool playerHasVerticalSpeed = Mathf.Abs(rb2d.velocity.y) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = Mathf.Abs(rb2d.velocity.x) > minVelocity;
+        bool playerHasVerticalSpeed = Mathf.Abs(rb2d.velocity.y) > minVelocity;
         animator.SetBool("isWalking", playerHasHorizontalSpeed || playerHasVerticalSpeed);
 
-        if (!Mathf.Approximately(rb2d.velocity.x, 0.0f) || !Mathf.Approximately(rb2d.velocity.y, 0.0f))
+        if (playerHasHorizontalSpeed || playerHasVerticalSpeed)
         {
             lookDirection.Set(rb2d.velocity.x, rb2d.velocity.y);
             lookDirection.Normalize();

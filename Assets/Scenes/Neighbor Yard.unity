@@ -1816,7 +1816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3534004761253888007, guid: 394f8bb825d7c264f88a00983c3c4751, type: 3}
       propertyPath: m_Distance
-      value: 1.3218545
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3534004761253888007, guid: 394f8bb825d7c264f88a00983c3c4751, type: 3}
       propertyPath: m_ConnectedRigidBody

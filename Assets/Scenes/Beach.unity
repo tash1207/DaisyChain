@@ -7278,10 +7278,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3534004761253888007, guid: 394f8bb825d7c264f88a00983c3c4751, type: 3}
-      propertyPath: m_Distance
-      value: 0.86977065
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534004761253888007, guid: 394f8bb825d7c264f88a00983c3c4751, type: 3}
       propertyPath: m_ConnectedRigidBody
       value: 
       objectReference: {fileID: 8085534832487777275}

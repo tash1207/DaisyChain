@@ -258,7 +258,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -290,10 +290,10 @@ SpringJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 9.065506
-  m_DampingRatio: 0
-  m_Frequency: 100
+  m_AutoConfigureDistance: 0
+  m_Distance: 1.1
+  m_DampingRatio: 1
+  m_Frequency: 0
 --- !u!114 &7402391588691536200
 MonoBehaviour:
   m_ObjectHideFlags: 0
